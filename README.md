@@ -1,2 +1,3 @@
 # businext.ai
-Business insight extractor and interpreter
+
+**Bus**iness **in**sight **ext**ractor **a**nd **i**nterpreter
