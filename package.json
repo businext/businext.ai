@@ -1,0 +1,31 @@
+{
+  "name": "businext",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Business Insight Extractor and Interpreter",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node .",
+    "setupDockerImage": "npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/businext/businext.ai.git"
+  },
+  "contributors": [
+    "Josh Cheng (JoshuaC15)",
+    "Benny Lam (DawYeong)",
+    "Justin Xu (xujustinj)",
+    "Tim Zwart (tim-zwart)"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/businext/businext.ai/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.37",
+    "typescript": "^4.2.4"
+  }
+}

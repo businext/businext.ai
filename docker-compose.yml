@@ -1,0 +1,7 @@
+version: "3.8"
+
+services:
+  businext_bot:
+    image: businext:latest
+    build: .
+    restart: unless-stopped
