@@ -5,3 +5,6 @@ services:
     image: businext:latest
     build: .
     restart: unless-stopped
+    volumes:
+      - ./src:/usr/app/src
+    command: npm run start:dev

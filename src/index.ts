@@ -1,3 +1,6 @@
-const message: string = "Hello Businext!";
+const main = () => {
+    const message: string = "Hello Businext!";
+    console.log(message);
+}
 
-console.log(message);
+main();
