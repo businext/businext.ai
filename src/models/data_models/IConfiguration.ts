@@ -19,13 +19,13 @@ export interface OpenCage {
 
 export const defaultConfig: IConfiguration = {
 	googlePlaces: {
-		apiKey: ''
+		apiKey: '',
 	},
 	yelp: {
 		apiKey: '',
-		clientID: ''
+		clientID: '',
 	},
 	openCage: {
-		apiKey: ''
-	}
-}
+		apiKey: '',
+	},
+};
