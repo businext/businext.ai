@@ -11,6 +11,7 @@ export class YelpBusinessImageProvider extends BaseBusinessImageProvider {
 		const geocode = await new OpenCageApiUtils(this.config)
 			.init()
 			.then((x) => x.getGeocodefromAddress(businessInfo.address));
-		console.log(geocode);
+
+		console.log(await yelpApi.getImages(businessInfo.name, geocode));
 	}
 }
