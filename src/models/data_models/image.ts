@@ -1,21 +1,15 @@
-import { Data, Extraction } from '../information';
+import { Data } from '../data';
+import { Extraction } from '../extraction';
 
 export class Image implements Data {
 	constructor(public source: string) {}
 
-	// TODO: probably a bunch of other fields belong here
-
-	description(): string {
-		return 'Image.description: TODO';
-	}
+	// TODO (Benny): probably a bunch of other fields belong here
 }
 
-export class ImageExtraction implements Extraction {
+// An ExtractedImage contains all the extractions for a single image
+export class ExtractedImage implements Extraction {
 	constructor(public data: Image) {}
 
-	// TODO: probably a bunch of other fields belong here
-
-	description(): string {
-		return 'ImageExtraction.description: TODO';
-	}
+	// TODO (Josh): probably a bunch of other fields belong here
 }

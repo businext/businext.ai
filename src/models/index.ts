@@ -1,3 +1,3 @@
-export { Data, Extraction, Information } from './information';
-export { Insight, BusinessInsights } from './insight';
-export * from './data_models';
+export { Data } from './data';
+export { Extraction } from './extraction';
+export { Insight } from './insight';
