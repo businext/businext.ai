@@ -1,6 +1,18 @@
-const main = () => {
-    const message: string = "Hello Businext!";
-    console.log(message);
-}
+import { ApolloServer, gql } from 'apollo-server';
 
-main();
+const typeDefs = gql`
+	type Query {
+		dummy: String
+	}
+`;
+const resolvers = {
+	Query: {
+		dummy: () => '',
+	},
+};
+const server = new ApolloServer({ typeDefs, resolvers });
+
+// The `listen` method launches a web server.
+server.listen().then(({ url }) => {
+	console.log(`🚀  Server ready at ${url}`);
+});
