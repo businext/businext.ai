@@ -1,15 +1,11 @@
-import { Data } from '../data';
-import { Extraction } from '../extraction';
+import { IData, IExtracted } from '../data';
 
-export class Image implements Data {
-	constructor(public source: string) {}
-
+// A picture of something to do with a business
+export interface IImage extends IData {
 	// TODO (Benny): probably a bunch of other fields belong here
 }
 
 // An ExtractedImage contains all the extractions for a single image
-export class ExtractedImage implements Extraction {
-	constructor(public data: Image) {}
-
+export interface IExtractedImage extends IExtracted<IImage> {
 	// TODO (Josh): probably a bunch of other fields belong here
 }
