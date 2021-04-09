@@ -1,10 +1,5 @@
-type Evidence<T> = {
-	source: T;
-	reason: string;
-};
-
-export interface Insight<T> {
-	value: T;
+export interface Insight<Value, EvidenceCollection> {
+	value: Value;
 	confidence: number;
-	evidence: Evidence<string>;
+	evidence: EvidenceCollection;
 }
