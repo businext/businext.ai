@@ -24,24 +24,17 @@ export class OpenCageApiUtils {
 		};
 	}
 
-	public async addressLookup(address: string): Promise<Address | null> {
+	public async addressLookup(address: string): Promise<Address | undefined> {
 		const results = await opencage.geocode({ q: address, key: this.apiKey }).then((data) => data?.results);
-
-		if (results?.length === 0) {
-			return null;
-		}
 
 		const result = results?.[0];
 
 		return this.reformatGeocodeResult(result);
 	}
 
-	public getGeocodefromAddress(address: string): Promise<Geocode> {
+	public getGeocodefromAddress(address: string): Promise<Geocode | undefined> {
 		return this.addressLookup(address)
-			.then(
-				(address) =>
-					address?.geocode ?? { lat: 0, lng: 0 } /*default geocode, might want this to be a configuration*/
-			)
+			.then((address) => address?.geocode ?? undefined)
 			.catch((err) => {
 				console.error('OpenCage getGeocodefromAddress() Error:', err.stack);
 				throw err;
