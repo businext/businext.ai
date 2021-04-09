@@ -7,7 +7,7 @@ export class OpenCageApiUtils {
 
 	constructor(private config: IConfiguration) {}
 
-	public async init(): Promise<OpenCageApiUtils> {
+	public async init(): Promise<this> {
 		this.apiKey = this.config.openCage.apiKey;
 		return this;
 	}

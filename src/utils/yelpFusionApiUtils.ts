@@ -8,7 +8,7 @@ export class YelpFusionApiUtils {
 
 	constructor(private config: IConfiguration) {}
 
-	public async init(): Promise<YelpFusionApiUtils> {
+	public async init(): Promise<this> {
 		const apiKey = this.config.yelp.apiKey;
 		this.yelpClient = yelp.client(apiKey);
 		return this;
