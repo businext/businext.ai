@@ -1,19 +1,19 @@
 export interface IConfiguration {
-	googlePlaces: GooglePlaces;
-	yelp: Yelp;
-	openCage: OpenCage;
+	googlePlaces: GooglePlacesConfig;
+	yelp: YelpConfig;
+	openCage: OpenCageConfig;
 }
 
-export interface Yelp {
+export interface YelpConfig {
 	apiKey: string;
 	clientID: string;
 }
 
-export interface GooglePlaces {
+export interface GooglePlacesConfig {
 	apiKey: string;
 }
 
-export interface OpenCage {
+export interface OpenCageConfig {
 	apiKey: string;
 }
 
