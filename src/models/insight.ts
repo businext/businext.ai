@@ -6,7 +6,7 @@ export type Evidence<EvidenceSource extends IEvidenceSource> = {
 	reason: string;
 };
 
-// An IEvidenceCollection's fields contain different types of Evidence
+// An EvidenceCollection's fields contain different types of Evidence
 export interface IEvidenceCollection {
 	[evidenceType: string]: Array<Evidence<IEvidenceSource>>;
 }
