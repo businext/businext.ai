@@ -1,8 +1,8 @@
 // Label is a description assigned to an extracted image based on what the image contains
 export interface ILabel {
 	description: string;
-    confidence: number;
-    topicality?: number;
+	confidence: number;
+	topicality?: number;
 }
 
 // Coordinate is a point on an image given by an x and y value
@@ -13,7 +13,7 @@ export type Coordinate = {
 
 // ObjectDetected is an object detected in an extracted image with its location in the image tracked
 export interface IObjectDetected {
-    object_name: string;
-    confidence: number;
-    bounding_poly: Array<Coordinate>;
+	object_name: string;
+	confidence: number;
+	bounding_poly: Array<Coordinate>;
 }
