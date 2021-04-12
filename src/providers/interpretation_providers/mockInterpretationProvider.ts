@@ -1,7 +1,11 @@
-import { IInterpretationProvider, BusinessInsights, InterpretationProps } from './interpretationProvider';
+import { IInterpretationProvider, BusinessInsights, InterpretationParams } from './interpretationProvider';
+
+export interface MockConfig {}
 
 export class MockInterpretationProvider implements IInterpretationProvider {
-	interpret(information: InterpretationProps): BusinessInsights {
+	constructor(config: MockConfig) {}
+
+	public interpret(information: InterpretationParams): BusinessInsights {
 		return {
 			hasDelivery: {
 				value: true,

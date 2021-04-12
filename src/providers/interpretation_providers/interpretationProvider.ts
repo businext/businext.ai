@@ -11,10 +11,10 @@ export interface BusinessInsights {
 	servesAlcohol?: Insight<boolean, EvidenceCollection>;
 }
 
-export interface InterpretationProps {
+export interface InterpretationParams {
 	images: Array<IExtractedImage>;
 }
 
 export interface IInterpretationProvider {
-	interpret(information: InterpretationProps): BusinessInsights;
+	interpret(information: InterpretationParams): Promise<BusinessInsights> | BusinessInsights;
 }

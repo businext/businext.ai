@@ -7,4 +7,5 @@ services:
     restart: unless-stopped
     volumes:
       - ./src:/usr/app/src
+      - ./models:/usr/app/models
     command: npm run start:dev

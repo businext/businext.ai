@@ -1,5 +1,8 @@
 # Auto-generated lib output folder
-lib
+lib/
+
+# ML Models
+models/
 
 ###############################################################################
 # Copied from the standard Node gitignore

@@ -1,15 +1,22 @@
 import { IInterpretationProvider } from './interpretationProvider';
-import { MockInterpretationProvider } from './mockInterpretationProvider';
+import { MockConfig, MockInterpretationProvider } from './mockInterpretationProvider';
+import { Word2VecConfig, Word2VecInterpretationProvider } from './word2vecInterpretationProvider';
 
-interface Config {
-	interpretationProviderName: 'mock';
+export interface InterpretationConfig {
+	interpretationProviderName: 'mock' | 'word2vec';
+	interpretationProviderConfig: MockConfig | Word2VecConfig;
 }
 
-export class InterpretationProviderFactory {
-	from({ interpretationProviderName }: Config): IInterpretationProvider {
-		switch (interpretationProviderName) {
-			case 'mock':
-				return new MockInterpretationProvider();
-		}
+export const getInterpretationProvider = async (
+	config: InterpretationConfig
+): Promise<IInterpretationProvider> => {
+	const { interpretationProviderName } = config;
+	switch (interpretationProviderName) {
+		case 'mock':
+			const mockConfig = config.interpretationProviderConfig as MockConfig;
+			return new MockInterpretationProvider(mockConfig);
+		case 'word2vec':
+			const word2vecConfig = config.interpretationProviderConfig as Word2VecConfig;
+			return await Word2VecInterpretationProvider.from(word2vecConfig);
 	}
-}
+};
