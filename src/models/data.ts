@@ -3,7 +3,7 @@ export interface IData {
 	source: string;
 }
 
-// Extracted<Data> contains all extractions from a piece of data of that type
-export interface IExtracted<Data extends IData> {
-	origin: Data;
+// Extracted<DataType> contains all extractions from a piece of data of that type
+export interface IExtracted<DataType extends IData> {
+	origin: DataType;
 }
