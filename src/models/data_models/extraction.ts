@@ -1,5 +1,5 @@
 // Label is a description assigned to an extracted image based on what the image contains
-export interface ILabel {
+export interface Label {
 	description: string;
 	confidence: number;
 	topicality?: number;
@@ -12,7 +12,7 @@ export type Coordinate = {
 };
 
 // ObjectDetected is an object detected in an extracted image with its location in the image tracked
-export interface IObjectDetected {
+export interface ObjectDetected {
 	object_name: string;
 	confidence: number;
 	bounding_poly: Array<Coordinate>;

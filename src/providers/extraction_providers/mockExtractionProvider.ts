@@ -1,8 +1,8 @@
-import { IExtractionProvider } from './extractionProvider';
-import { IImage, IExtractedImage } from '../../models/data_models/image';
+import { ExtractionProvider } from './extractionProvider';
+import { Image, ExtractedImage } from '../../models/data_models/image';
 
-export class MockExtractionProvider implements IExtractionProvider {
-	extract(image_urls: IImage[]): IExtractedImage[] {
+export class MockExtractionProvider implements ExtractionProvider {
+	extract(images: Array<Image>): Array<ExtractedImage> {
 		return [
 			{
 				origin: {

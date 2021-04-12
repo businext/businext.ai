@@ -1,7 +1,10 @@
-import { IImage, IExtractedImage } from '../../models/data_models';
+import { Image, ExtractedImage } from '../../models/data_models/image';
 
-export interface IExtractionProvider {
-	// Given an array of IImage return an array of all of the extractions returned by
-	// the extraction provider, where each IExtractedImage pertains to a single input image
-	extract(image_urls: Array<IImage>): Array<IExtractedImage>;
+export interface ExtractionProvider {
+	/**
+	 * Extracts all labels and objects from an array of input Images
+	 * @param  {Array<Image>} image     Array of images to extract.
+	 * @return {Array<ExtractedImage>}  Array of extractions, where each item pertains to an Image.
+	 */
+	extract(images: Array<Image>): Array<ExtractedImage>;
 }
