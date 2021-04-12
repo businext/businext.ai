@@ -22,7 +22,7 @@ export class Word2VecInterpretationProvider implements InterpretationProvider {
 	}
 
 	protected isAlcoholic(word: string): boolean {
-		const alcoholicWords = ['beer', 'wine', 'alcohol', 'alcoholic'];
+		const alcoholicWords = ['beer', 'wine', 'alcohol', 'alcoholic', 'cocktail'];
 		return alcoholicWords.some((alcoholicWord) => this.similar(word, alcoholicWord));
 	}
 
