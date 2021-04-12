@@ -1,1 +1,1 @@
-export { IImage as Image, IExtractedImage as ExtractedImage } from './image';
+export { Image, ExtractedImage } from './image';
