@@ -25,11 +25,9 @@ export class OpenCageApiUtils {
 	}
 
 	public async addressLookup(address: string): Promise<Address | undefined> {
-		const results = await opencage.geocode({ q: address, key: this.apiKey }).then((data) => data?.results);
-
-		const result = results?.[0];
-
-		return this.reformatGeocodeResult(result);
+		return opencage
+			.geocode({ q: address, key: this.apiKey })
+			.then((data) => this.reformatGeocodeResult(data?.results?.[0]));
 	}
 
 	public getGeocodefromAddress(address: string): Promise<Geocode | undefined> {
