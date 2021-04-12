@@ -2,12 +2,12 @@ import { IExtractionProvider } from './extractionProvider';
 import { MockExtractionProvider } from './mockExtractionProvider';
 
 interface Config {
-	interpretationProviderName: 'mock';
+	extractionProviderName: 'mock';
 }
 
 export class ExtractionProviderFactory {
-	from({ interpretationProviderName }: Config): IExtractionProvider {
-		switch (interpretationProviderName) {
+	from({ extractionProviderName }: Config): IExtractionProvider {
+		switch (extractionProviderName) {
 			case 'mock':
 				return new MockExtractionProvider();
 		}
