@@ -24,16 +24,18 @@ export class YelpFusionApiUtils {
 		});
 
 		const id = response?.jsonBody?.businesses?.[0].id;
-		const images: Array<IImage> = (
-			id && await this.yelpClient.business(id).then((result) => (
-				result.jsonBody?.photos?.map((photo) => (
-					<IImage>{
-						source: photo,
-						provider: EImageProvider.yelp,
-					}
-				)
-			)) || []
-		);
+		const images: Array<IImage> =
+			id &&
+			(await this.yelpClient.business(id).then(
+				(result) =>
+					result.jsonBody?.photos?.map(
+						(photo) =>
+							<IImage>{
+								source: photo,
+								provider: EImageProvider.yelp,
+							}
+					) || []
+			));
 
 		return images;
 	}
