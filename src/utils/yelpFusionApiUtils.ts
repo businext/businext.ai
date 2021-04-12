@@ -1,6 +1,7 @@
 import yelp from 'yelp-fusion';
 import { YelpClient } from 'yelp-fusion';
 import { IConfiguration } from '../models/data_models/IConfiguration.js';
+import { IImage, EImageProvider } from '../models/data_models/image.js';
 import { Geocode } from '../models/data_models/types.js';
 
 export class YelpFusionApiUtils {
@@ -14,7 +15,7 @@ export class YelpFusionApiUtils {
 		return this;
 	}
 
-	public async getImages(name: string, geocode: Geocode): Promise<string[]> {
+	public async getImages(name: string, geocode: Geocode): Promise<IImage[]> {
 		// calls the api twice to first get the id of the business and then to actually retrieve the photos...
 		const response = await this.yelpClient.search({
 			term: name,
@@ -23,11 +24,18 @@ export class YelpFusionApiUtils {
 		});
 
 		const id = response?.jsonBody?.businesses?.[0].id;
-		const images: string[] = [];
+		const images: IImage[] = [];
 		if (id) {
 			await this.yelpClient.business(id).then((result) => {
 				if (result?.jsonBody?.photos) {
-					images.push(...result.jsonBody.photos);
+					images.push(
+						...result.jsonBody.photos.map((photo) => {
+							return <IImage>{
+								source: photo,
+								provider: EImageProvider.yelp,
+							};
+						})
+					);
 				}
 			});
 		}
