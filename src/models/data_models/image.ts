@@ -8,6 +8,6 @@ export interface IImage extends IData {
 
 // An ExtractedImage contains all the extractions for a single image
 export interface IExtractedImage extends IExtracted<IImage> {
-	labels: Array<ILabel>;
+	assigned_labels: Array<ILabel>;
 	detected_objects: Array<IObjectDetected>;
 }
