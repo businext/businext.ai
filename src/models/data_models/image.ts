@@ -6,7 +6,6 @@ export enum EImageProvider {
 }
 // A picture of something to do with a business
 export interface IImage extends IData {
-	// TODO (Benny): probably a bunch of other fields belong here
 	provider: EImageProvider;
 }
 
