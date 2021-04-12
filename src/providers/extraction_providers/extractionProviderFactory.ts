@@ -1,15 +1,14 @@
 import { ExtractionProvider } from './extractionProvider';
 import { MockExtractionProvider } from './mockExtractionProvider';
 
-interface Config {
+interface ExtractionConfig {
 	extractionProviderName: 'mock';
 }
 
-export class ExtractionProviderFactory {
-	from({ extractionProviderName }: Config): ExtractionProvider {
-		switch (extractionProviderName) {
-			case 'mock':
-				return new MockExtractionProvider();
-		}
+export const getExtractionProvider = (config: ExtractionConfig): ExtractionProvider => {
+	const { extractionProviderName } = config;
+	switch (extractionProviderName) {
+		case 'mock':
+			return new MockExtractionProvider();
 	}
-}
+};
