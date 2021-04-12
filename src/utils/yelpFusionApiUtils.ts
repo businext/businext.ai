@@ -5,7 +5,7 @@ import { IImage, EImageProvider } from '../models/data_models/image.js';
 import { Geocode } from '../models/data_models/types.js';
 
 export class YelpFusionApiUtils {
-	private yelpClient?: YelpClient;
+	protected yelpClient?: YelpClient;
 
 	constructor(private config: DataSourceConfiguration) {}
 

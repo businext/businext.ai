@@ -3,7 +3,7 @@ import opencage from 'opencage-api-client';
 import { DataSourceConfiguration } from '../models/data_models/dataSourceConfiguration';
 
 export class OpenCageApiUtils {
-	private apiKey: string = '';
+	protected apiKey: string = '';
 
 	constructor(private config: DataSourceConfiguration) {}
 
