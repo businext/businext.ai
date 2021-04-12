@@ -8,5 +8,5 @@ export abstract class BaseBusinessImageProvider implements IBusinessImageProvide
 	protected config: IConfiguration =
 		(process.env.BUSINESS_API_CONFIG && JSON.parse(process.env.BUSINESS_API_CONFIG)) || defaultConfig;
 
-	public abstract getBusinessImages(businessInfo: BusinessInfoInput): Promise<IImage[]>;
+	public abstract getBusinessImages(businessInfo: BusinessInfoInput): Promise<Array<IImage>>;
 }

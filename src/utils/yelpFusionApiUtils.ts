@@ -15,7 +15,7 @@ export class YelpFusionApiUtils {
 		return this;
 	}
 
-	public async getImages(name: string, geocode: Geocode): Promise<IImage[]> {
+	public async getImages(name: string, geocode: Geocode): Promise<Array<IImage>> {
 		// calls the api twice to first get the id of the business and then to actually retrieve the photos...
 		const response = await this.yelpClient.search({
 			term: name,
@@ -24,7 +24,7 @@ export class YelpFusionApiUtils {
 		});
 
 		const id = response?.jsonBody?.businesses?.[0].id;
-		const images: IImage[] = [];
+		const images: Array<IImage> = [];
 		if (id) {
 			await this.yelpClient.business(id).then((result) => {
 				if (result?.jsonBody?.photos) {
