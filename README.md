@@ -10,7 +10,7 @@ These configurations are to set the api keys for the various of services that ar
 | ------------------------- | :----------: | :----------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------- |
 | `BUSINESS_API_CONFIG`     |     JSON     | Click [here](README.md#business_api_config-example) to go to the example | Stringified IConfiguration object which contains your confidential information to access the APIs. |
 
-# `BUSINESS_API_CONFIG` Example
+## `BUSINESS_API_CONFIG` Example
 
 ```bash
 BUSINESS_API_CONFIG='{"googlePlaces":{"apiKey":"your-api-key"},"yelp":{"apiKey":"your-api-key","clientID":"your-client-ID"},"openCage":{"apiKey":"your-api-key"}}'
