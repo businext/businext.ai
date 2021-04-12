@@ -7,8 +7,11 @@ export type Evidence<EvidenceSource extends IEvidenceSource> = {
 };
 
 // An insight is a value about a business, with evidence for how it was inferred
-export type Insight<Value, EvidenceCollection extends Record<string, Array<Evidence<IEvidenceSource>>>> = {
-	value: Value;
+export type Insight<
+	Inference,
+	EvidenceCollection extends Record<string, Array<Evidence<IEvidenceSource>>>
+> = {
+	inference: Inference;
 	confidence: number;
 	evidence: EvidenceCollection;
 };
