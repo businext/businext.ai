@@ -6,12 +6,12 @@ export type Evidence<SourceType extends IEvidenceSource> = {
 	reason: string;
 };
 
-// An insight is a value about a business, with evidence for how it was inferred
-export type Insight<
-	InferenceType,
+// An inference is a piece of insight about a business, with evidence for how it was inferred
+export type Inference<
+	InsightType,
 	EvidenceCollectionType extends Record<string, Array<Evidence<IEvidenceSource>>>
 > = {
-	inference: InferenceType;
+	insight: InsightType;
 	confidence: number;
 	evidence: EvidenceCollectionType;
 };
