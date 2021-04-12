@@ -6,13 +6,8 @@ export type Evidence<EvidenceSource extends IEvidenceSource> = {
 	reason: string;
 };
 
-// An EvidenceCollection's fields contain different types of Evidence
-export interface IEvidenceCollection {
-	[evidenceType: string]: Array<Evidence<IEvidenceSource>>;
-}
-
 // An insight is a value about a business, with evidence for how it was inferred
-export type Insight<Value, EvidenceCollection extends IEvidenceCollection> = {
+export type Insight<Value, EvidenceCollection extends Record<string, Array<Evidence<IEvidenceSource>>>> = {
 	value: Value;
 	confidence: number;
 	evidence: EvidenceCollection;

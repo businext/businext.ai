@@ -1,7 +1,7 @@
-import { Evidence, IEvidenceCollection, Insight } from '../../models';
+import { IEvidenceSource, Evidence, Insight } from '../../models';
 import { IExtractedImage } from '../../models/data_models';
 
-interface EvidenceCollection extends IEvidenceCollection {
+export interface EvidenceCollection extends Record<string, Array<Evidence<IEvidenceSource>>> {
 	images: Array<Evidence<IExtractedImage>>;
 }
 
@@ -15,6 +15,6 @@ export interface InterpretationParams {
 	images: Array<IExtractedImage>;
 }
 
-export interface IInterpretationProvider {
+export interface InterpretationProvider {
 	interpret(information: InterpretationParams): Promise<BusinessInsights> | BusinessInsights;
 }

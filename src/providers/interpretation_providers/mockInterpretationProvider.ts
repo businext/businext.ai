@@ -1,8 +1,8 @@
-import { IInterpretationProvider, BusinessInsights, InterpretationParams } from './interpretationProvider';
+import { InterpretationProvider, BusinessInsights, InterpretationParams } from './interpretationProvider';
 
 export interface MockConfig {}
 
-export class MockInterpretationProvider implements IInterpretationProvider {
+export class MockInterpretationProvider implements InterpretationProvider {
 	constructor(config: MockConfig) {}
 
 	public interpret(information: InterpretationParams): BusinessInsights {

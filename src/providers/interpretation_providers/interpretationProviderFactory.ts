@@ -1,4 +1,4 @@
-import { IInterpretationProvider } from './interpretationProvider';
+import { InterpretationProvider } from './interpretationProvider';
 import { MockConfig, MockInterpretationProvider } from './mockInterpretationProvider';
 import { Word2VecConfig, Word2VecInterpretationProvider } from './word2vecInterpretationProvider';
 
@@ -7,9 +7,7 @@ export interface InterpretationConfig {
 	interpretationProviderConfig: MockConfig | Word2VecConfig;
 }
 
-export const getInterpretationProvider = async (
-	config: InterpretationConfig
-): Promise<IInterpretationProvider> => {
+export const getInterpretationProvider = async (config: InterpretationConfig): Promise<InterpretationProvider> => {
 	const { interpretationProviderName } = config;
 	switch (interpretationProviderName) {
 		case 'mock':
