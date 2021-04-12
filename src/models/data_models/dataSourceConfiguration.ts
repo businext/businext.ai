@@ -1,4 +1,4 @@
-export interface IConfiguration {
+export interface DataSourceConfiguration {
 	googlePlaces: GooglePlacesConfig;
 	yelp: YelpConfig;
 	openCage: OpenCageConfig;
@@ -17,7 +17,7 @@ export interface OpenCageConfig {
 	apiKey: string;
 }
 
-export const defaultConfig: IConfiguration = {
+export const defaultConfig: DataSourceConfiguration = {
 	googlePlaces: {
 		apiKey: '',
 	},

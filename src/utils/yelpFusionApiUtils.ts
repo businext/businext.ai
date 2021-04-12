@@ -1,13 +1,13 @@
 import yelp from 'yelp-fusion';
 import { YelpClient } from 'yelp-fusion';
-import { IConfiguration } from '../models/data_models/IConfiguration.js';
+import { DataSourceConfiguration } from '../models/data_models/dataSourceConfiguration.js';
 import { IImage, EImageProvider } from '../models/data_models/image.js';
 import { Geocode } from '../models/data_models/types.js';
 
 export class YelpFusionApiUtils {
 	private yelpClient?: YelpClient;
 
-	constructor(private config: IConfiguration) {}
+	constructor(private config: DataSourceConfiguration) {}
 
 	public async init(): Promise<this> {
 		const apiKey = this.config.yelp.apiKey;

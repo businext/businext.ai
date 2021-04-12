@@ -1,11 +1,11 @@
 import { Address, Geocode } from '../models/data_models/types';
 import opencage from 'opencage-api-client';
-import { IConfiguration } from '../models/data_models/IConfiguration';
+import { DataSourceConfiguration } from '../models/data_models/dataSourceConfiguration';
 
 export class OpenCageApiUtils {
 	private apiKey: string = '';
 
-	constructor(private config: IConfiguration) {}
+	constructor(private config: DataSourceConfiguration) {}
 
 	public async init(): Promise<this> {
 		this.apiKey = this.config.openCage.apiKey;
