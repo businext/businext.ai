@@ -4,7 +4,7 @@
 
 # Configurations
 
-These configurations are to set the api keys for the various of services that are used to fetch images and data from. These are to be set in a `.env` file in the root directory of the project.
+These configurations are to set the api keys for the various services that are used to fetch images and data from. These are to be set in a `.env` file in the root directory of the project.
 
 | Environment Variable Name | Value Format |                                 Example                                  | Explanation                                                                                        |
 | ------------------------- | :----------: | :----------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------- |
