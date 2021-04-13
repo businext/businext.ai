@@ -1,7 +1,8 @@
+import { Extraction } from '../data';
+
 // Label is a description assigned to an extracted image based on what the image contains
-export interface Label {
+export interface AssignedLabel extends Extraction {
 	description: string;
-	confidence: number;
 	topicality?: number;
 }
 
@@ -11,9 +12,8 @@ export type Coordinate = {
 	y: number;
 };
 
-// ObjectDetected is an object detected in an extracted image with its location in the image tracked
-export interface ObjectDetected {
+// DetectedObject is an object detected in an extracted image with its location in the image tracked
+export interface DetectedObject extends Extraction {
 	object_name: string;
-	confidence: number;
 	bounding_poly: Array<Coordinate>;
 }

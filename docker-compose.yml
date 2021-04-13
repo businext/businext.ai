@@ -1,10 +1,14 @@
-version: "3.8"
+version: '3.8'
 
 services:
   businext_bot:
     image: businext:latest
     build: .
     restart: unless-stopped
+    env_file:
+      - .env
     volumes:
       - ./src:/usr/app/src
+    ports:
+      - '${LOCAL_ENDPOINT_PORT:-4000}:${ENDPOINT_PORT:-4000}'
     command: npm run start:dev
