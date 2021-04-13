@@ -1,2 +1,2 @@
-export { IData, IExtracted } from './data';
-export { IEvidenceSource, Evidence, IEvidenceCollection, Insight } from './insight';
+export { Data, Extraction, Extracted } from './data';
+export { EvidenceSource, Evidence, Inference } from './insight';
