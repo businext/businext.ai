@@ -30,14 +30,14 @@ export class Word2VecInterpretationProvider implements InterpretationProvider {
 		// TODO: waiting on IExtractedImage
 		return {
 			hasDelivery: {
-				value: true,
+				insight: true,
 				confidence: 0.7,
 				evidence: {
 					images: [],
 				},
 			},
 			servesAlcohol: {
-				value: false,
+				insight: false,
 				confidence: 0.2,
 				evidence: {
 					images: [],

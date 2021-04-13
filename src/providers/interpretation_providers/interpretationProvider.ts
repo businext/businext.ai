@@ -1,20 +1,20 @@
-import { IEvidenceSource, Evidence, Insight } from '../../models';
-import { IExtractedImage } from '../../models/data_models';
+import { EvidenceSource, Evidence, Inference } from '../../models';
+import { ExtractedImage } from '../../models/data_models';
 
-export interface EvidenceCollection extends Record<string, Array<Evidence<IEvidenceSource>>> {
-	images: Array<Evidence<IExtractedImage>>;
+export interface EvidenceCollection extends Record<string, Array<Evidence<EvidenceSource>>> {
+	images: Array<Evidence<ExtractedImage>>;
 }
 
 export interface BusinessInsights {
-	capacity?: Insight<number, EvidenceCollection>;
-	hasDelivery?: Insight<boolean, EvidenceCollection>;
-	servesAlcohol?: Insight<boolean, EvidenceCollection>;
+	capacity?: Inference<number, EvidenceCollection>;
+	hasDelivery?: Inference<boolean, EvidenceCollection>;
+	servesAlcohol?: Inference<boolean, EvidenceCollection>;
 }
 
 export interface InterpretationParams {
-	images: Array<IExtractedImage>;
+	images: Array<ExtractedImage>;
 }
 
 export interface InterpretationProvider {
-	interpret(information: InterpretationParams): Promise<BusinessInsights> | BusinessInsights;
+	interpret(information: InterpretationParams): BusinessInsights;
 }

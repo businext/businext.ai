@@ -8,14 +8,14 @@ export class MockInterpretationProvider implements InterpretationProvider {
 	public interpret(information: InterpretationParams): BusinessInsights {
 		return {
 			hasDelivery: {
-				value: true,
+				insight: true,
 				confidence: 0.7,
 				evidence: {
 					images: [],
 				},
 			},
 			servesAlcohol: {
-				value: false,
+				insight: false,
 				confidence: 0.2,
 				evidence: {
 					images: [],
