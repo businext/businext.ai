@@ -8,7 +8,7 @@
 		"target": "es2017",
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
-		"noImplicitAny": false,
+		"noImplicitAny": true,
 		"strictPropertyInitialization": true,
 		"strictNullChecks": true,
 		"skipLibCheck": true,

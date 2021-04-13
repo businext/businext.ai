@@ -1,4 +1,5 @@
-import w2v from 'word2vec'; // TODO: add a .d.ts file to give w2v proper types
+// @ts-ignore (TODO: add a .d.ts file to give w2v proper types)
+import w2v from 'word2vec';
 import { promisify } from 'util';
 import { InterpretationProvider, BusinessInsights, InterpretationParams } from './interpretationProvider';
 
@@ -21,9 +22,17 @@ export class Word2VecInterpretationProvider implements InterpretationProvider {
 		return this.model.similarity(word1, word2) > this.similarityThreshold;
 	}
 
+	protected static alcoholicWords: ReadonlyArray<string> = [
+		'alcohol',
+		'alcoholic',
+		'beer',
+		'cocktail',
+		'wine',
+	];
 	protected isAlcoholic(word: string): boolean {
-		const alcoholicWords = ['alcohol', 'alcoholic', 'beer', 'cocktail', 'wine'];
-		return alcoholicWords.some((alcoholicWord) => this.similar(word, alcoholicWord));
+		return Word2VecInterpretationProvider.alcoholicWords.some(
+			(alcoholicWord) => this.similar(word, alcoholicWord)
+		);
 	}
 
 	public interpret(information: InterpretationParams): BusinessInsights {
