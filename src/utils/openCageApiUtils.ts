@@ -5,7 +5,7 @@ import { DataSourceConfiguration } from '../models/data_models/dataSourceConfigu
 export class OpenCageApiUtils {
 	protected apiKey: string = '';
 
-	constructor(private config: DataSourceConfiguration) {}
+	constructor(protected config: DataSourceConfiguration) {}
 
 	public async init(): Promise<this> {
 		this.apiKey = this.config.openCage.apiKey;

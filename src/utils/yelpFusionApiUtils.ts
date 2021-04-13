@@ -7,7 +7,7 @@ import { Geocode } from '../models/data_models/types.js';
 export class YelpFusionApiUtils {
 	protected yelpClient?: YelpClient;
 
-	constructor(private config: DataSourceConfiguration) {}
+	constructor(protected config: DataSourceConfiguration) {}
 
 	public async init(): Promise<this> {
 		const apiKey = this.config.yelp.apiKey;
