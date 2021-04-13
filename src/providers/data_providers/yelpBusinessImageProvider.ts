@@ -13,7 +13,7 @@ export class YelpBusinessImageProvider extends BaseBusinessImageProvider {
 			.init()
 			.then((x) => x.getGeocodefromAddress(businessInfo.address));
 		if (geocode) {
-			return await yelpApi.getImages(businessInfo.name, geocode);
+			return yelpApi.getImages(businessInfo.name, geocode);
 		} else {
 			throw new Error('No geocode for location ' + businessInfo.address);
 		}
