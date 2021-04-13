@@ -1,6 +1,6 @@
 import { Data, Extracted, Extraction } from '../data';
 
-export enum ImageProvider {
+export const enum ImageProviderName {
 	yelp = 'YELP',
 	google_places = 'GOOGLE PLACES',
 }
