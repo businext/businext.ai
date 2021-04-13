@@ -27,14 +27,18 @@ export class OpenCageApiUtils {
 	public async addressLookup(address: string): Promise<Address | undefined> {
 		return opencage
 			.geocode({ q: address, key: this.apiKey })
-			.then((data) => this.reformatGeocodeResult(data?.results?.[0]));
+			.then((data) => this.reformatGeocodeResult(data?.results?.[0]))
+			.catch((err) => {
+				console.error('OpenCage addressLookup() Error:', err.stack);
+				throw err;
+			});
 	}
 
 	public getGeocodeFromAddress(address: string): Promise<Geocode | undefined> {
 		return this.addressLookup(address)
 			.then((address) => address?.geocode ?? undefined)
 			.catch((err) => {
-				console.error('OpenCage getGeocodefromAddress() Error:', err.stack);
+				console.error('OpenCage getGeocodeFromAddress() Error:', err.stack);
 				throw err;
 			});
 	}
