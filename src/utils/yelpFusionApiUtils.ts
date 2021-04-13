@@ -1,7 +1,7 @@
 import yelp from 'yelp-fusion';
 import { YelpClient } from 'yelp-fusion';
 import { DataSourceConfiguration } from '../models/data_models/dataSourceConfiguration.js';
-import { Image, ImageProvider } from '../models/data_models/image.js';
+import { Image, ImageProviderName } from '../models/data_models/image.js';
 import { Geocode } from '../models/data_models/types.js';
 
 export class YelpFusionApiUtils {
@@ -31,7 +31,7 @@ export class YelpFusionApiUtils {
 						(photo) =>
 							<Image>{
 								source: photo,
-								provider: ImageProvider.yelp,
+								provider: ImageProviderName.yelp,
 							}
 					)
 				))) ||

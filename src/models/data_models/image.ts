@@ -6,7 +6,7 @@ export const enum ImageProviderName {
 }
 // A picture of something to do with a business
 export interface Image extends Data {
-	provider: ImageProvider;
+	provider: ImageProviderName;
 }
 
 // An ExtractedImage contains all the extractions for a single image
