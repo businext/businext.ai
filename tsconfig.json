@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"lib": ["ES2017", "esnext.asynciterable"],
+		"lib": ["ES2018", "esnext.asynciterable"],
 		"module": "commonjs",
 		"noImplicitReturns": true,
 		"outDir": "lib",
@@ -12,7 +12,9 @@
 		"strictPropertyInitialization": true,
 		"strictNullChecks": true,
 		"skipLibCheck": true,
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true
 	},
 	"compileOnSave": true,
 	"include": ["src"]

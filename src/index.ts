@@ -1,24 +1,27 @@
-import {
-	InterpretationParams,
-	InterpretationConfig,
-	getInterpretationProvider,
-} from './providers/interpretation_providers';
+import { ApolloServer, gql } from 'apollo-server';
 
-const main = async () => {
-	const message: string = 'Hello Businext!';
-	console.log(message);
+const server_port_default: number = 4000;
+const server_port: number = process.env.ENDPOINT_PORT
+	? parseInt(process.env.ENDPOINT_PORT)
+	: server_port_default;
 
-    const interpretationParams: InterpretationParams = { images: [] };
-    const config: InterpretationConfig = {
-			interpretationProviderName: 'WORD2VEC',
-			interpretationProviderConfig: {
-				modelName: 'glove.6B.50d.txt',
-				relevanceThreshold: 0.5,
-			},
-		};
-    const interpretationProvider = await getInterpretationProvider(config);
-    const insights = interpretationProvider.interpret(interpretationParams);
-    console.log(insights);
+const typeDefs = gql`
+	type Query {
+		dummy: String
+	}
+`;
+const resolvers = {
+	Query: {
+		dummy: () => '',
+	},
 };
+const server = new ApolloServer({ typeDefs, resolvers });
 
-main();
+// The `listen` method launches a web server.
+server
+	.listen({
+		port: server_port,
+	})
+	.then(({ url }) => {
+		console.log(`🚀  Server ready at ${url}`);
+	});
