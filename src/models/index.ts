@@ -1,2 +1,2 @@
-export { Data, Extracted } from './data';
+export { Data, Extraction, Extracted } from './data';
 export { EvidenceSource, Evidence, Inference } from './insight';

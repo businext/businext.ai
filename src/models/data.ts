@@ -3,7 +3,15 @@ export interface Data {
 	source: string;
 }
 
-// Extracted<DataType> contains all extractions from a piece of data of that type
-export interface Extracted<DataType extends Data> {
+export interface Extraction {
+	confidence: number;
+}
+
+// Extracted<DataType> contains all extractions from a piece of data of the given type
+export interface Extracted<
+	DataType extends Data,
+	ExtractionCollectionType extends Record<string, Array<Extraction>>
+> {
 	origin: DataType;
+	extractions: ExtractionCollectionType;
 }

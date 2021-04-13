@@ -1,4 +1,4 @@
-import { Data, Extracted } from '../data';
+import { Data, Extracted, Extraction } from '../data';
 
 // A picture of something to do with a business
 export interface Image extends Data {
@@ -6,6 +6,6 @@ export interface Image extends Data {
 }
 
 // An ExtractedImage contains all the extractions for a single image
-export interface ExtractedImage extends Extracted<Image> {
+export interface ExtractedImage extends Extracted<Image, Record<string, Array<Extraction>>> {
 	// TODO (Josh): probably a bunch of other fields belong here
 }
