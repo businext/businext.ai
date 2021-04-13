@@ -9,4 +9,6 @@ services:
       - .env
     volumes:
       - ./src:/usr/app/src
+    ports:
+      - '${LOCAL_ENDPOINT_PORT:-4000}:${ENDPOINT_PORT:-4000}'
     command: npm run start:dev
