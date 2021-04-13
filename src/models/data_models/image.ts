@@ -1,15 +1,15 @@
-import { IData, IExtracted } from '../data';
+import { Data, Extracted, Extraction } from '../data';
 
-export enum EImageProvider {
+export enum ImageProvider {
 	yelp = 'YELP',
 	google_places = 'GOOGLE PLACES',
 }
 // A picture of something to do with a business
-export interface IImage extends IData {
-	provider: EImageProvider;
+export interface Image extends Data {
+	provider: ImageProvider;
 }
 
 // An ExtractedImage contains all the extractions for a single image
-export interface IExtractedImage extends IExtracted<IImage> {
+export interface ExtractedImage extends Extracted<Image, Record<string, Array<Extraction>>> {
 	// TODO (Josh): probably a bunch of other fields belong here
 }
