@@ -1,9 +1,13 @@
 import { Data, Extracted, Extraction } from '../data';
 import { AssignedLabel, DetectedObject } from './extraction';
 
+export const enum ImageProviderName {
+	yelp = 'YELP',
+	google_places = 'GOOGLE PLACES',
+}
 // A picture of something to do with a business
 export interface Image extends Data {
-	// TODO (Benny): probably a bunch of other fields belong here
+	provider: ImageProviderName;
 }
 
 // A collection of the types of extractions obtainable for an image
