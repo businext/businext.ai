@@ -10,12 +10,12 @@ const main = async () => {
 
     const interpretationParams: InterpretationParams = { images: [] };
     const config: InterpretationConfig = {
-        interpretationProviderName: 'word2vec',
-        interpretationProviderConfig: {
-            modelName: 'glove.6B.50d.txt',
-            relevanceThreshold: 0.5,
-        },
-    };
+			interpretationProviderName: 'WORD2VEC',
+			interpretationProviderConfig: {
+				modelName: 'glove.6B.50d.txt',
+				relevanceThreshold: 0.5,
+			},
+		};
     const interpretationProvider = await getInterpretationProvider(config);
     const insights = interpretationProvider.interpret(interpretationParams);
     console.log(insights);
