@@ -30,7 +30,7 @@ export class OpenCageApiUtils {
 			.then((data) => this.reformatGeocodeResult(data?.results?.[0]));
 	}
 
-	public getGeocodefromAddress(address: string): Promise<Geocode | undefined> {
+	public getGeocodeFromAddress(address: string): Promise<Geocode | undefined> {
 		return this.addressLookup(address)
 			.then((address) => address?.geocode ?? undefined)
 			.catch((err) => {
