@@ -39,6 +39,7 @@
     "opencage-api-client": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
+    "word2vec": "^1.1.4",
     "yelp-fusion": "^3.0.0"
   }
 }
