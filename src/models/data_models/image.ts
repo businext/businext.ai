@@ -6,7 +6,7 @@ export interface Image extends Data {
 	// TODO (Benny): probably a bunch of other fields belong here
 }
 
-// A collection of the types of extractions obtainable for a piece of data
+// A collection of the types of extractions obtainable for an image
 interface ImageExtractionCollection extends Record<string, Array<Extraction>> {
 	assigned_labels: Array<AssignedLabel>;
 	detected_objects: Array<DetectedObject>;
