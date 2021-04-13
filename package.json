@@ -15,10 +15,10 @@
     "url": "git+https://github.com/businext/businext.ai.git"
   },
   "contributors": [
-    "Joshua Cheng (JoshuaC15)",
-    "Benny Lam (DawYeong)",
-    "Justin Xu (xujustinj)",
-    "Tim Zwart (tim-zwart)"
+    "Joshua Cheng <josh510cheng@gmail.com>",
+    "Benny Lam <bennylam6@gmail.com>",
+    "Justin Xu <xu.justin.j@gmail.com>",
+    "Tim Zwart <timrzwart@gmail.com>"
   ],
   "license": "ISC",
   "bugs": {
