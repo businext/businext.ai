@@ -3,7 +3,11 @@ import { InterpretationProvider, BusinessInsights, InterpretationParams } from '
 export interface MockConfig {}
 
 export class MockInterpretationProvider implements InterpretationProvider {
-	constructor(config: MockConfig) {}
+	private constructor() {}
+
+	static async from(config: MockConfig): Promise<MockInterpretationProvider> {
+		return new MockInterpretationProvider();
+	}
 
 	public interpret(information: InterpretationParams): BusinessInsights {
 		return {

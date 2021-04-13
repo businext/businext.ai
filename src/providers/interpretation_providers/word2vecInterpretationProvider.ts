@@ -1,4 +1,4 @@
-import w2v from 'word2vec';
+import w2v from 'word2vec'; // TODO: add a .d.ts file to give w2v proper types
 import { promisify } from 'util';
 import { InterpretationProvider, BusinessInsights, InterpretationParams } from './interpretationProvider';
 
@@ -8,7 +8,7 @@ export interface Word2VecConfig {
 }
 
 export class Word2VecInterpretationProvider implements InterpretationProvider {
-	constructor(protected model: any, protected similarityThreshold: number) {}
+	private constructor(protected model: any, protected similarityThreshold: number) {}
 
 	static async from(config: Word2VecConfig): Promise<Word2VecInterpretationProvider> {
 		const { modelName, similarityThreshold } = config;
@@ -22,12 +22,12 @@ export class Word2VecInterpretationProvider implements InterpretationProvider {
 	}
 
 	protected isAlcoholic(word: string): boolean {
-		const alcoholicWords = ['beer', 'wine', 'alcohol', 'alcoholic', 'cocktail'];
+		const alcoholicWords = ['alcohol', 'alcoholic', 'beer', 'cocktail', 'wine'];
 		return alcoholicWords.some((alcoholicWord) => this.similar(word, alcoholicWord));
 	}
 
 	public interpret(information: InterpretationParams): BusinessInsights {
-		// TODO: waiting on IExtractedImage
+		// TODO: waiting on ExtractedImage for actual implementation
 		return {
 			hasDelivery: {
 				insight: true,
