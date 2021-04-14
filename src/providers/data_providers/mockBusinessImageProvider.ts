@@ -3,8 +3,6 @@ import { BusinessInfoInput } from '../../models/data_models/types';
 import { Image, ImageProviderName } from '../../models/data_models/image';
 
 export class MockBusinessImageProvider extends BaseBusinessImageProvider {
-	protected imageProviderName: string = 'mock';
-
 	public async getBusinessImages(businessInfo: BusinessInfoInput): Promise<Array<Image>> {
 		return [
 			{
