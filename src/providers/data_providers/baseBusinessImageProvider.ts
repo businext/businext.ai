@@ -4,7 +4,6 @@ import { Image } from '../../models/data_models/image';
 import { BusinessImageProvider } from './businessImageProvider';
 
 export abstract class BaseBusinessImageProvider implements BusinessImageProvider {
-	protected abstract imageProviderName: string;
 	protected config: DataSourceConfiguration =
 		(process.env.BUSINESS_API_CONFIG && JSON.parse(process.env.BUSINESS_API_CONFIG)) || defaultConfig;
 

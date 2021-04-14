@@ -5,8 +5,6 @@ import { BaseBusinessImageProvider } from './baseBusinessImageProvider';
 import { Image } from '../../models/data_models/image';
 
 export class YelpBusinessImageProvider extends BaseBusinessImageProvider {
-	protected imageProviderName: string = 'yelp';
-
 	public async getBusinessImages(businessInfo: BusinessInfoInput): Promise<Array<Image>> {
 		const yelpApi = await new YelpFusionApiUtils(this.config).init();
 		const geocode = await new OpenCageApiUtils(this.config)
