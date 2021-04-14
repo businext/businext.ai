@@ -1,0 +1,5 @@
+#import BusinessInfoInput from 'businessInfoInput.graphql'
+
+type Query {
+	getBusinessInfo(businessInfoInput: BusinessInfoInput!): String
+}
