@@ -5,10 +5,6 @@ import { YelpBusinessImageProvider } from './yelpBusinessImageProvider';
 import { Image } from '../../models/data_models/image';
 import { BusinessInfoInput } from '../../models/data_models/types';
 
-export interface ImageProviderConfig {
-	imageProviderName: string;
-}
-
 export class BusinessImageProviderFactory {
 	private getImageProviderFromString(provider: string): BusinessImageProvider {
 		switch (provider) {
