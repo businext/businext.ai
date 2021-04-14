@@ -11,13 +11,6 @@ export class MockInterpretationProvider implements InterpretationProvider {
 
 	public interpret(information: InterpretationParams): BusinessInferences {
 		return {
-			hasDelivery: {
-				insight: true,
-				confidence: 0.7,
-				evidence: {
-					images: [],
-				},
-			},
 			servesAlcohol: {
 				insight: false,
 				confidence: 0.2,

@@ -21,7 +21,9 @@ export class Word2VecInterpretationProvider implements InterpretationProvider {
 	}
 
 	protected similar(word1: string, word2: string): boolean {
-		return this.model.similarity(word1, word2) > this.similarityThreshold;
+		const similarity: number | null = this.model.similarity(word1, word2);
+		console.debug(`${word1} ~ ${word2} : ${similarity}`);
+		return similarity !== null && similarity > this.similarityThreshold;
 	}
 
 	protected static alcoholicWords: ReadonlyArray<string> = [
@@ -31,10 +33,20 @@ export class Word2VecInterpretationProvider implements InterpretationProvider {
 		'cocktail',
 		'wine',
 	];
-	protected isAlcoholic(word: string): boolean {
-		return Word2VecInterpretationProvider.alcoholicWords.some((alcoholicWord) =>
-			this.similar(word, alcoholicWord)
-		);
+	protected static nonAlcoholicWords: ReadonlySet<string> = new Set([
+		'coffee',
+		'non-alcoholic',
+	])
+	protected isAlcoholic(text: string): boolean {
+		const words = text.toLowerCase().split(' ');
+		return (
+			!words.some((word) => Word2VecInterpretationProvider.nonAlcoholicWords.has(word))
+			&& words.some((word) =>
+				Word2VecInterpretationProvider.alcoholicWords.some((alcoholicWord) =>
+					this.similar(word, alcoholicWord)
+				)
+			)
+		)
 	}
 
 	protected inferImage(inferences: BusinessInferences, image: ExtractedImage): BusinessInferences {
@@ -48,29 +60,27 @@ export class Word2VecInterpretationProvider implements InterpretationProvider {
 			const { object_name: keyword } = obj;
 			keywords.get(keyword)?.push(obj) || keywords.set(keyword, [obj]);
 		}
+		console.debug(keywords);
 
-		console.log(keywords);
-
+		// Infer alcoholism
 		const { servesAlcohol } = inferences;
-		{
-			// Infer alcoholism
-			const alcoholicKeywords = Array.from(keywords.keys()).filter(this.isAlcoholic);
-			if (alcoholicKeywords.length > 0) {
-				const alcoholicExtractions = alcoholicKeywords.reduce(
-					(extractions, keyword) => extractions.concat(keywords.get(keyword)!),
-					[] as Array<Extraction>
-				);
-				servesAlcohol.insight = true;
-				servesAlcohol.confidence = alcoholicExtractions.reduce(
-					(confidence, x) => Math.max(confidence, x.confidence),
-					servesAlcohol.confidence
-				);
-				servesAlcohol.evidence.images.push({
-					source: image,
-					reason: `detected keywords: ${alcoholicKeywords.join(', ')}`,
-				});
-			}
+		const alcoholicKeywords = Array.from(keywords.keys()).filter(this.isAlcoholic.bind(this));
+		if (alcoholicKeywords.length > 0) {
+			const alcoholicExtractions = alcoholicKeywords.reduce(
+				(extractions, keyword) => extractions.concat(keywords.get(keyword)!),
+				[] as Array<Extraction>
+			);
+			servesAlcohol.insight = true;
+			servesAlcohol.confidence = alcoholicExtractions.reduce(
+				(confidence, x) => Math.max(confidence, x.confidence),
+				servesAlcohol.confidence
+			);
+			servesAlcohol.evidence.images.push({
+				source: image,
+				reason: `detected keywords: ${alcoholicKeywords.join(', ')}`,
+			});
 		}
+
 		return inferences;
 	}
 
@@ -84,7 +94,7 @@ export class Word2VecInterpretationProvider implements InterpretationProvider {
 				},
 			},
 		};
-		inferences = information.images.reduce(this.inferImage, inferences);
+		inferences = information.images.reduce(this.inferImage.bind(this), inferences);
 		return inferences;
 	}
 }
