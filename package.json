@@ -33,6 +33,8 @@
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.1.16",
+    "@graphql-tools/graphql-file-loader": "^6.2.7",
+    "@graphql-tools/load": "^6.2.8",
     "apollo-server": "^2.22.2",
     "graphql": "^15.5.0",
     "opencage-api-client": "^1.0.0",
