@@ -6,10 +6,11 @@
 	"main": "lib/index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "tsc",
+		"build": "tsc && npm run copySchema",
 		"start": "node lib",
 		"start:dev": "concurrently 'tsc --watch' 'nodemon lib --ext js,graphql'",
-		"setupDockerImage": "npm install && npm run build"
+		"setupDockerImage": "npm install && npm run build",
+		"copySchema": "cp --recursive src/graphql/schemas/ lib/graphql"
 	},
 	"repository": {
 		"type": "git",
