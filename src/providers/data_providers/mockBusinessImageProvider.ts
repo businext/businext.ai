@@ -4,7 +4,7 @@ import { Image, ImageProviderName } from '../../models/data_models/image';
 
 export class MockBusinessImageProvider extends BaseBusinessImageProvider {
 	public async getBusinessImages(businessInfo: BusinessInfoInput): Promise<Array<Image>> {
-		return [
+		return Promise.resolve([
 			{
 				source: 'https://s3-media0.fl.yelpcdn.com/bphoto/AZllw6P3nvB0BCmsw5kMjQ/l.jpg',
 				provider: ImageProviderName.mock,
@@ -25,6 +25,6 @@ export class MockBusinessImageProvider extends BaseBusinessImageProvider {
 				source: 'https://pbs.twimg.com/media/DqsL2IXWwAArsrR.jpg',
 				provider: ImageProviderName.mock,
 			},
-		];
+		]);
 	}
 }
