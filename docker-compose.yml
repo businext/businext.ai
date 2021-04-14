@@ -3,7 +3,10 @@ version: '3.8'
 services:
   businext_bot:
     image: businext:latest
-    build: .
+    build:
+      context: .
+      args:
+        ENDPOINT_PORT: '${ENDPOINT_PORT:-4000}'
     restart: unless-stopped
     env_file:
       - .env

@@ -1,3 +1,4 @@
+// @ts-ignore (TODO: add a .d.ts file to give yelp proper types)
 import yelp, { YelpClient } from 'yelp-fusion';
 import { DataSourceConfiguration } from '../models/data_models/dataSourceConfiguration.js';
 import { Image, ImageProviderName } from '../models/data_models/image.js';
@@ -25,9 +26,9 @@ export class YelpFusionApiUtils {
 		const id = response?.jsonBody?.businesses?.[0].id;
 		const images: Array<Image> =
 			(id &&
-				(await this.yelpClient.business(id).then((result) =>
+				(await this.yelpClient.business(id).then((result: any) =>
 					result.jsonBody?.photos?.map(
-						(photo) =>
+						(photo: any) =>
 							<Image>{
 								source: photo,
 								provider: ImageProviderName.yelp,
