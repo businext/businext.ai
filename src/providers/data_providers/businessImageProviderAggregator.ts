@@ -5,7 +5,7 @@ import { YelpBusinessImageProvider } from './yelpBusinessImageProvider';
 import { Image } from '../../models/data_models/image';
 import { BusinessInfoInput } from '../../models/data_models/types';
 
-export class BusinessImageProviderFactory {
+export class BusinessImageProviderAggregator {
 	private getImageProvider(provider: string): BusinessImageProvider {
 		switch (provider) {
 			case ImageProviderName.mock:
