@@ -2,6 +2,7 @@ import { Data, Extracted, Extraction } from '../data';
 import { AssignedLabel, DetectedObject } from './extraction';
 
 export const enum ImageProviderName {
+	mock = 'MOCK',
 	yelp = 'YELP',
 	google_places = 'GOOGLE PLACES',
 }
