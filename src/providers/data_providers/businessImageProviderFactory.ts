@@ -7,7 +7,7 @@ export interface ImageProviderConfig {
 	imageProviderName: string;
 }
 
-export const getImageProvider = async (config: ImageProviderConfig): Promise<BusinessImageProvider> => {
+export const getImageProvider = (config: ImageProviderConfig): BusinessImageProvider => {
 	const { imageProviderName: name } = config;
 	switch (name) {
 		case ImageProviderName.mock:
