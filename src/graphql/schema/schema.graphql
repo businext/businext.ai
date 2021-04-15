@@ -14,7 +14,6 @@ type BooleanInsight {
 	evidence: EvidenceCollection!
 }
 
-
 type EvidenceCollection {
 	images: [ImageEvidence!]
 }
