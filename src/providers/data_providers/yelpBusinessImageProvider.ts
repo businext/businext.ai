@@ -1,4 +1,3 @@
-import { OpenCageApiUtils } from '../../utils/openCageApiUtils';
 import { YelpFusionApiUtils } from '../../utils/yelpFusionApiUtils';
 import { BusinessInfoInput, Geocode } from '../../models/data_models/types';
 import { BaseBusinessImageProvider } from './baseBusinessImageProvider';
