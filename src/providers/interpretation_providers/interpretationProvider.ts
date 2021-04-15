@@ -5,10 +5,8 @@ export interface EvidenceCollection extends Record<string, Array<Evidence<Eviden
 	images: Array<Evidence<ExtractedImage>>;
 }
 
-export interface BusinessInsights {
-	capacity?: Inference<number, EvidenceCollection>;
-	hasDelivery?: Inference<boolean, EvidenceCollection>;
-	servesAlcohol?: Inference<boolean, EvidenceCollection>;
+export interface BusinessInferences {
+	servesAlcohol: Inference<boolean, EvidenceCollection>;
 }
 
 export interface InterpretationParams {
@@ -16,5 +14,5 @@ export interface InterpretationParams {
 }
 
 export interface InterpretationProvider {
-	interpret(information: InterpretationParams): BusinessInsights;
+	interpret(information: InterpretationParams): BusinessInferences;
 }

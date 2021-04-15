@@ -5,8 +5,8 @@
 	"description": "Business Insight Extractor and Interpreter",
 	"main": "lib/index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "tsc && npm run copySchema",
+		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node lib",
 		"start:dev": "concurrently 'tsc --watch' 'nodemon lib --ext js,graphql'",
 		"setupDockerImage": "npm install && npm run build",
@@ -17,20 +17,14 @@
 		"url": "git+https://github.com/businext/businext.ai.git"
 	},
 	"contributors": [
-		"Joshua Cheng (JoshuaC15)",
-		"Benny Lam (DawYeong)",
-		"Justin Xu (xujustinj)",
-		"Tim Zwart (tim-zwart)"
+		"Joshua Cheng <josh510cheng@gmail.com>",
+		"Benny Lam <bennylam6@gmail.com>",
+		"Justin Xu <xu.justin.j@gmail.com>",
+		"Tim Zwart <timrzwart@gmail.com>"
 	],
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/businext/businext.ai/issues"
-	},
-	"devDependencies": {
-		"@types/node": "^14.14.37",
-		"concurrently": "^6.0.1",
-		"nodemon": "^2.0.7",
-		"typescript": "^4.2.4"
 	},
 	"dependencies": {
 		"@googlemaps/google-maps-services-js": "^3.1.16",
@@ -41,5 +35,11 @@
 		"opencage-api-client": "^1.0.0",
 		"word2vec": "^1.1.4",
 		"yelp-fusion": "^3.0.0"
+	},
+	"devDependencies": {
+		"@types/node": "^14.14.37",
+		"concurrently": "^6.0.1",
+		"nodemon": "^2.0.7",
+		"typescript": "^4.2.4"
 	}
 }

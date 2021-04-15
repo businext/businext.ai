@@ -1,7 +1,9 @@
 .gitignore
-Dockerfile
+.prettierrc
 docker-compose.yml
+Dockerfile
 README.md
+
 lib/
 models/
 
