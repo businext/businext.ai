@@ -4,14 +4,23 @@ import { MockBusinessImageProvider } from './mockBusinessImageProvider';
 import { YelpBusinessImageProvider } from './yelpBusinessImageProvider';
 import { Image } from '../../models/data_models/image';
 import { BusinessInfoInput } from '../../models/data_models/types';
+import { defaultConfig, DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
 
 export class BusinessImageProviderAggregator {
+	// load configs here
+	protected dataSourceConfigs: DataSourceConfiguration;
+
+	constructor() {
+		this.dataSourceConfigs =
+			(process.env.BUSINESS_API_CONFIG && JSON.parse(process.env.BUSINESS_API_CONFIG)) || defaultConfig;
+	}
+
 	private getImageProvider(provider: string): BusinessImageProvider {
 		switch (provider) {
 			case ImageProviderName.mock:
-				return new MockBusinessImageProvider();
+				return new MockBusinessImageProvider(this.dataSourceConfigs);
 			case ImageProviderName.yelp:
-				return new YelpBusinessImageProvider();
+				return new YelpBusinessImageProvider(this.dataSourceConfigs);
 			default:
 				throw Error(`${provider} is not a valid name for an interpretation provider`);
 		}
