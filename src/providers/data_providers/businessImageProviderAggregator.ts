@@ -9,19 +9,19 @@ import { defaultConfig, DataSourceConfiguration } from '../../models/data_models
 
 export class BusinessImageProviderAggregator {
 	// load configs here
-	protected dataSourceConfigs: DataSourceConfiguration;
+	protected dataSourceConfig: DataSourceConfiguration;
 
 	constructor() {
-		this.dataSourceConfigs =
+		this.dataSourceConfig =
 			(process.env.BUSINESS_API_CONFIG && JSON.parse(process.env.BUSINESS_API_CONFIG)) || defaultConfig;
 	}
 
 	private getImageProvider(provider: string): BusinessImageProvider {
 		switch (provider) {
 			case ImageProviderName.mock:
-				return new MockBusinessImageProvider(this.dataSourceConfigs);
+				return new MockBusinessImageProvider(this.dataSourceConfig);
 			case ImageProviderName.yelp:
-				return new YelpBusinessImageProvider(this.dataSourceConfigs);
+				return new YelpBusinessImageProvider(this.dataSourceConfig);
 			default:
 				throw Error(`${provider} is not a valid name for an interpretation provider`);
 		}
@@ -37,7 +37,7 @@ export class BusinessImageProviderAggregator {
 
 	public async getImages(businessInfo: BusinessInfoInput): Promise<Array<Image>> {
 		const providers = this.getImageProviders();
-		const geocode = await new OpenCageApiUtils(this.dataSourceConfigs)
+		const geocode = await new OpenCageApiUtils(this.dataSourceConfig)
 			.init()
 			.then((x) => x.getGeocodeFromAddress(businessInfo.address));
 
