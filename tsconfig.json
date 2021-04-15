@@ -17,5 +17,6 @@
 		"emitDecoratorMetadata": true
 	},
 	"compileOnSave": true,
-	"include": ["src"]
+	"include": ["src"],
+	"exclude": ["src/graphql/schema"]
 }
