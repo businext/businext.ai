@@ -42,10 +42,10 @@ export class GooglePlacesApiUtils {
 		return photos;
 	}
 
-	public async getPhoto(photo_ref: string): Promise<string | undefined> {
+	public async getPhoto(photoRef: string): Promise<string | undefined> {
 		const response = await this.googlePlacesApiClient.placePhoto({
 			params: {
-				photoreference: photo_ref,
+				photoreference: photoRef,
 				key: this.apiKey,
 				maxheight: 500 /* These hardcoded values can probably be configurations, there is a set minimum and a maximum though */,
 				maxwidth: 500,
