@@ -4,7 +4,7 @@ import { BusinessImageProvider } from './businessImageProvider';
 import { DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
 
 export abstract class BaseBusinessImageProvider implements BusinessImageProvider {
-	constructor(protected config: DataSourceConfiguration) {}
+	constructor(protected readonly config: DataSourceConfiguration) {}
 
 	public abstract getBusinessImages(businessInfo: BusinessInfoInput, geocode: Geocode): Promise<Array<Image>>;
 }
