@@ -9,7 +9,6 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node lib",
 		"start:dev": "concurrently 'tsc --watch' 'nodemon lib --ext js,graphql'",
-		"setupDockerImage": "npm install && npm run build",
 		"copySchema": "cp --recursive src/graphql/schema/ lib/graphql"
 	},
 	"repository": {
