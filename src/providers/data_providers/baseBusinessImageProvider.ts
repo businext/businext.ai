@@ -1,4 +1,4 @@
-import { BusinessInfoInput } from '../../models/data_models/types';
+import { BusinessInfoInput, Geocode } from '../../models/data_models/types';
 import { Image } from '../../models/data_models/image';
 import { BusinessImageProvider } from './businessImageProvider';
 import { DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
@@ -6,5 +6,5 @@ import { DataSourceConfiguration } from '../../models/data_models/dataSourceConf
 export abstract class BaseBusinessImageProvider implements BusinessImageProvider {
 	constructor(protected config: DataSourceConfiguration) {}
 
-	public abstract getBusinessImages(businessInfo: BusinessInfoInput): Promise<Array<Image>>;
+	public abstract getBusinessImages(businessInfo: BusinessInfoInput, geocode: Geocode): Promise<Array<Image>>;
 }

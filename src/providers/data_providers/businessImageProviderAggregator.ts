@@ -2,6 +2,7 @@ import { BusinessImageProvider } from './businessImageProvider';
 import { ImageProviderName } from '../../models/data_models/image';
 import { MockBusinessImageProvider } from './mockBusinessImageProvider';
 import { YelpBusinessImageProvider } from './yelpBusinessImageProvider';
+import { OpenCageApiUtils } from '../../utils/openCageApiUtils';
 import { Image } from '../../models/data_models/image';
 import { BusinessInfoInput } from '../../models/data_models/types';
 import { defaultConfig, DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
@@ -36,8 +37,14 @@ export class BusinessImageProviderAggregator {
 
 	public async getImages(businessInfo: BusinessInfoInput): Promise<Array<Image>> {
 		const providers = this.getImageProviders();
+		const geocode = await new OpenCageApiUtils(this.dataSourceConfigs)
+			.init()
+			.then((x) => x.getGeocodeFromAddress(businessInfo.address));
+
+		if (!geocode) throw Error(`Geocode not found for location`);
+
 		return Promise.all(
-			providers.map((provider) => provider.getBusinessImages(businessInfo))
+			providers.map((provider) => provider.getBusinessImages(businessInfo, geocode))
 		).then((results) => results.reduce((acc, value) => acc.concat(value), []));
 	}
 }
