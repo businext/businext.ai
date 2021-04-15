@@ -1,5 +1,6 @@
 import { BaseBusinessImageProvider } from './baseBusinessImageProvider';
 import { Image, ImageProviderName } from '../../models/data_models/image';
+import { BusinessInfoInput, Geocode } from '../../models/data_models/types';
 
 export class MockBusinessImageProvider extends BaseBusinessImageProvider {
 	public async getBusinessImages(businessInfo: BusinessInfoInput, geocode: Geocode): Promise<Array<Image>> {
