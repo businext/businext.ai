@@ -1,5 +1,35 @@
 #import BusinessInfoInput from 'businessInfoInput.graphql'
 
 type Query {
-	getBusinessInfo(businessInfoInput: BusinessInfoInput!): String
+	getBusinessInfo(businessInfoInput: BusinessInfoInput!): BusinessInferences!
+}
+
+type BusinessInferences {
+	servesAlcohol: BooleanInsight!
+}
+
+type BooleanInsight {
+	insight: Boolean!
+	confidence: Float!
+	evidence: ImageEvidenceCollection!
+}
+
+type ImageEvidenceCollection {
+	assigned_labels: [AssignedLabel!]
+	detected_objects: [DetectedObject!]
+}
+
+type AssignedLabel {
+	description: String!
+	topicality: Float
+}
+
+type DetectedObject {
+	object_name: String!
+	bounding_polygon: [Coordinate!]
+}
+
+type Coordinate {
+	x: Float!
+	y: Float!
 }
