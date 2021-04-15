@@ -11,7 +11,7 @@ type BusinessInferences {
 type BooleanInsight {
 	insight: Boolean!
 	confidence: Float!
-	evidence: ImageEvidenceCollection!
+	evidence: EvidenceCollection!
 }
 
 type ImageEvidenceCollection {
