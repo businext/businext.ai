@@ -20,6 +20,7 @@ type ImageEvidenceCollection {
 }
 
 type AssignedLabel {
+	confidence: Float!
 	description: String!
 	topicality: Float
 }
