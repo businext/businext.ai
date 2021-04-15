@@ -2,16 +2,26 @@ import { BusinessImageProvider } from './businessImageProvider';
 import { ImageProviderName } from '../../models/data_models/image';
 import { MockBusinessImageProvider } from './mockBusinessImageProvider';
 import { YelpBusinessImageProvider } from './yelpBusinessImageProvider';
+import { OpenCageApiUtils } from '../../utils/openCageApiUtils';
 import { Image } from '../../models/data_models/image';
 import { BusinessInfoInput } from '../../models/data_models/types';
+import { defaultConfig, DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
 
 export class BusinessImageProviderAggregator {
+	// load configs here
+	protected dataSourceConfig: DataSourceConfiguration;
+
+	constructor() {
+		this.dataSourceConfig =
+			(process.env.BUSINESS_API_CONFIG && JSON.parse(process.env.BUSINESS_API_CONFIG)) || defaultConfig;
+	}
+
 	private getImageProvider(provider: string): BusinessImageProvider {
 		switch (provider) {
 			case ImageProviderName.mock:
-				return new MockBusinessImageProvider();
+				return new MockBusinessImageProvider(this.dataSourceConfig);
 			case ImageProviderName.yelp:
-				return new YelpBusinessImageProvider();
+				return new YelpBusinessImageProvider(this.dataSourceConfig);
 			default:
 				throw Error(`${provider} is not a valid name for an interpretation provider`);
 		}
@@ -27,8 +37,14 @@ export class BusinessImageProviderAggregator {
 
 	public async getImages(businessInfo: BusinessInfoInput): Promise<Array<Image>> {
 		const providers = this.getImageProviders();
+		const geocode = await new OpenCageApiUtils(this.dataSourceConfig)
+			.init()
+			.then((x) => x.getGeocodeFromAddress(businessInfo.address));
+
+		if (!geocode) throw Error(`Geocode not found for location`);
+
 		return Promise.all(
-			providers.map((provider) => provider.getBusinessImages(businessInfo))
+			providers.map((provider) => provider.getBusinessImages(businessInfo, geocode))
 		).then((results) => results.reduce((acc, value) => acc.concat(value), []));
 	}
 }

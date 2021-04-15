@@ -1,0 +1,4 @@
+input BusinessInfoInput {
+	name: String!
+	address: String!
+}
