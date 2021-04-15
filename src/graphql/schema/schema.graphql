@@ -14,7 +14,27 @@ type BooleanInsight {
 	evidence: EvidenceCollection!
 }
 
-type ImageEvidenceCollection {
+
+type EvidenceCollection {
+	images: [ImageEvidence!]
+}
+
+type ImageEvidence {
+	source: ExtractedImage!
+	reason: String!
+}
+
+type ExtractedImage {
+	origin: Image!
+	extractions: ImageExtractionCollection!
+}
+
+type Image {
+	source: String!
+	provider: String!
+}
+
+type ImageExtractionCollection {
 	assigned_labels: [AssignedLabel!]
 	detected_objects: [DetectedObject!]
 }
