@@ -29,15 +29,14 @@ export class VisionExtractionProvider implements ExtractionProvider {
 	}
 
 	protected createDetectedObject(object: LocalizedObjectAnnotation): DetectedObject {
-		let bounding_poly: Array<Coordinate> = object.boundingPoly!.normalizedVertices!.map(
-			VisionExtractionProvider.createBoundingVertex
-		);
-		bounding_poly = bounding_poly.filter((coord) => {
-			if (coord.x == 0 && coord.y == 0) {
-				return false
-			}
-			return true
-		})
+		let bounding_poly: Array<Coordinate> = object
+			.boundingPoly!.normalizedVertices!.map(VisionExtractionProvider.createBoundingVertex)
+			.filter((coord) => {
+				if (coord.x == 0 && coord.y == 0) {
+					return false;
+				}
+				return true;
+			});
 		return {
 			object_name: object?.name || '',
 			confidence: object?.score || 0,
@@ -52,7 +51,7 @@ export class VisionExtractionProvider implements ExtractionProvider {
 			features: [{ type: requestTypes.LabelDetection }, { type: requestTypes.ObjectLocalization }],
 		};
 
-		const [results] = await client.annotateImage(request);
+		const [results] = (await client.annotateImage(request)) || [];
 		const labels = results.labelAnnotations || [];
 		const objects = results.localizedObjectAnnotations || [];
 
