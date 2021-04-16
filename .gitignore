@@ -5,7 +5,7 @@ lib/
 models/
 
 # API keys
-businextai-f686af52ed49.json
+businextai-[0-9a-f]*.json
 
 ###############################################################################
 # Copied from the standard Node gitignore
