@@ -6,7 +6,7 @@ import { Image, ImageProviderName } from '../../models/data_models/image';
 export class GooglePlacesBusinessImageProvider extends BaseBusinessImageProvider {
 	public async getBusinessImages(businessInfo: BusinessInfoInput): Promise<Array<Image>> {
 		const googlePlacesApi = await new GooglePlacesApiUtils(this.config).init();
-		return await googlePlacesApi
+		return googlePlacesApi
 			.getPlaceID(businessInfo.address, businessInfo.name)
 			.then((id) => googlePlacesApi.getPlaceDetails(id))
 			.then((photoRefs) =>
