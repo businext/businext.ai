@@ -23,8 +23,8 @@ export class VisionExtractionProvider implements ExtractionProvider {
 
 	protected static createBoundingVertex(coordinate: NormalizedVertex): Coordinate {
 		return {
-			x: coordinate?.x || 0,
-			y: coordinate?.y || 0,
+			x: coordinate.x ?? undefined,
+			y: coordinate.y ?? undefined,
 		};
 	}
 
@@ -32,7 +32,7 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		let bounding_poly: Array<Coordinate> = object
 			.boundingPoly!.normalizedVertices!.map(VisionExtractionProvider.createBoundingVertex)
 			.filter((coord) => {
-				if (coord.x == 0 && coord.y == 0) {
+				if (coord.x === undefined || coord.y === undefined) {
 					return false;
 				}
 				return true;
