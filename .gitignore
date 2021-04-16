@@ -4,6 +4,9 @@ lib/
 # ML Models
 models/
 
+# API keys
+businextai-f686af52ed49.json
+
 ###############################################################################
 # Copied from the standard Node gitignore
 # https://github.com/github/gitignore/blob/master/Node.gitignore
