@@ -8,8 +8,8 @@ export interface AssignedLabel extends Extraction {
 
 // Coordinate is a point on an image given by an x and y value
 export type Coordinate = {
-	x: number | undefined;
-	y: number | undefined;
+	x: number;
+	y: number;
 };
 
 // DetectedObject is an object detected in an extracted image with its location in the image tracked

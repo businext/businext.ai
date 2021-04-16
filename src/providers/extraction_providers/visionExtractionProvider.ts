@@ -21,26 +21,20 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		};
 	}
 
-	protected static createBoundingVertex(coordinate: NormalizedVertex): Coordinate {
-		return {
-			x: coordinate.x ?? undefined,
-			y: coordinate.y ?? undefined,
-		};
+	protected static createBoundingVertex(coordinate: NormalizedVertex): Coordinate | null {
+		const { x, y } = coordinate;
+		return x === null || x === undefined || y === null || y === undefined ? null : { x, y };
 	}
 
 	protected createDetectedObject(object: LocalizedObjectAnnotation): DetectedObject {
-		let bounding_poly: Array<Coordinate> = object
-			.boundingPoly!.normalizedVertices!.map(VisionExtractionProvider.createBoundingVertex)
-			.filter((coord) => {
-				if (coord.x === undefined || coord.y === undefined) {
-					return false;
-				}
-				return true;
-			});
+		const boundingPoly: Array<Coordinate> =
+			object.boundingPoly?.normalizedVertices
+				?.map(VisionExtractionProvider.createBoundingVertex)
+				.filter((coord): coord is Coordinate => coord !== null) ?? [];
 		return {
 			object_name: object?.name || '',
 			confidence: object?.score || 0,
-			bounding_poly: bounding_poly,
+			bounding_poly: boundingPoly,
 		};
 	}
 
