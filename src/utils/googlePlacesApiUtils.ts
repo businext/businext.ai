@@ -38,7 +38,7 @@ export class GooglePlacesApiUtils {
 			},
 		});
 		const photos = response?.data?.result?.photos?.map((x) => x.photo_reference);
-		if (photos === undefined) throw Error('Cannot find place details for place id');
+		if (photos === undefined) throw Error('Cannot find photos for place id');
 		return photos;
 	}
 
