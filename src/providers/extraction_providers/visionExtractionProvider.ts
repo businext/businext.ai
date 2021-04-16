@@ -13,39 +13,19 @@ export class VisionExtractionProvider implements ExtractionProvider {
 	protected createAssignedLabel(
 		label: vision.protos.google.cloud.vision.v1.IEntityAnnotation
 	): AssignedLabel {
-		let description = '';
-		let confidence = 0;
-		if (label.description) {
-			description = label.description;
+		return {
+			description: label?.description || '',
+			confidence: label?.score || 0,
 		}
-		if (label.score) {
-			confidence = label.score;
-		}
-
-		const assignedLabel: AssignedLabel = {
-			description: description,
-			confidence: confidence,
-		};
-		return assignedLabel;
 	}
 
 	protected createBoundingPoly(
 		boundingPoly: vision.protos.google.cloud.vision.v1.INormalizedVertex
 	): Coordinate {
-		let x: number = 0;
-		let y: number = 0;
-		if (boundingPoly.x) {
-			x = boundingPoly.x;
+		return {
+			x: boundingPoly?.x || 0,
+			y: boundingPoly?.y || 0,
 		}
-		if (boundingPoly.y) {
-			y = boundingPoly.y;
-		}
-
-		const coordinate: Coordinate = {
-			x: x,
-			y: y,
-		};
-		return coordinate;
 	}
 
 	protected createDetectedObject(
@@ -54,21 +34,11 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		const bounding_poly: Array<Coordinate> = object.boundingPoly!.normalizedVertices!.map((coord) =>
 			this.createBoundingPoly(coord)
 		);
-		let objectName = '';
-		let confidence = 0;
-		if (object.name) {
-			objectName = object.name;
-		}
-		if (object.score) {
-			confidence = object.score;
-		}
-
-		const detectedObject: DetectedObject = {
-			object_name: objectName,
-			confidence: confidence,
+		return {
+			object_name: object?.name || '',
+			confidence: object?.score || 0,
 			bounding_poly: bounding_poly,
-		};
-		return detectedObject;
+		}
 	}
 
 	protected async extractSingleImage(image: Image): Promise<ExtractedImage> {
@@ -82,8 +52,8 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		const labels = results.labelAnnotations!;
 		const objects = results.localizedObjectAnnotations!;
 
-		const assignedLabels: Array<AssignedLabel> = labels.map((label) => this.createAssignedLabel(label));
-		const detectedObjects: Array<DetectedObject> = objects.map((object) => this.createDetectedObject(object));
+		const assignedLabels = labels.map((label) => this.createAssignedLabel(label));
+		const detectedObjects = objects.map((object) => this.createDetectedObject(object));
 
 		const extracted: ExtractedImage = {
 			origin: {
@@ -99,7 +69,6 @@ export class VisionExtractionProvider implements ExtractionProvider {
 	}
 
 	public async extract(images: Array<Image>): Promise<Array<ExtractedImage>> {
-		const extractedImages = Promise.all(images.map((image) => this.extractSingleImage(image)));
-		return extractedImages;
+		return Promise.all(images.map((image) => this.extractSingleImage(image)));;
 	}
 }
