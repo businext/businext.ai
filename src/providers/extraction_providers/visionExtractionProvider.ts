@@ -2,7 +2,7 @@ import { ExtractionProvider } from './extractionProvider';
 import { Image, ExtractedImage } from '../../models/data_models/image';
 import { AssignedLabel, DetectedObject, Coordinate } from '../../models/data_models/extraction';
 
-import vision = require('@google-cloud/vision');
+import * as vision from '@google-cloud/vision';
 
 const enum requestTypes {
 	labelDetection = 'LABEL_DETECTION',
