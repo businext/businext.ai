@@ -29,9 +29,15 @@ export class VisionExtractionProvider implements ExtractionProvider {
 	}
 
 	protected createDetectedObject(object: LocalizedObjectAnnotation): DetectedObject {
-		const bounding_poly: Array<Coordinate> = object.boundingPoly!.normalizedVertices!.map(
+		let bounding_poly: Array<Coordinate> = object.boundingPoly!.normalizedVertices!.map(
 			VisionExtractionProvider.createBoundingVertex
 		);
+		bounding_poly = bounding_poly.filter((coord) => {
+			if (coord.x == 0 && coord.y == 0) {
+				return false
+			}
+			return true
+		})
 		return {
 			object_name: object?.name || '',
 			confidence: object?.score || 0,
