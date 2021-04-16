@@ -6,6 +6,8 @@ export class GooglePlacesApiUtils {
 	protected googlePlacesApiClient!: Client;
 	protected apiKey: string = '';
 
+	private photoMaxHeight: number = 500; /* These hardcoded values can probably be configurations, there is a set minimum and a maximum though */
+	private photoMaxWidth: number = 500;
 	constructor(protected config: DataSourceConfiguration) {}
 
 	public async init(): Promise<this> {
@@ -48,8 +50,8 @@ export class GooglePlacesApiUtils {
 				params: {
 					photoreference: photoRef,
 					key: this.apiKey,
-					maxheight: 500 /* These hardcoded values can probably be configurations, there is a set minimum and a maximum though */,
-					maxwidth: 500,
+					maxheight: this.photoMaxHeight,
+					maxwidth: this.photoMaxWidth,
 				},
 				responseType: 'stream',
 			});
