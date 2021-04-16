@@ -23,7 +23,7 @@ export class YelpFusionApiUtils {
 			longitude: geocode.lng,
 		});
 
-		const id = response?.jsonBody?.businesses?.[0].id;
+		const id = response?.jsonBody?.businesses?.[0]?.id;
 		const images: Array<Image> =
 			(id &&
 				(await this.yelpClient.business(id).then((result: any) =>
