@@ -1,4 +1,4 @@
-import { BusinessInfoInput, Geocode } from '../../models/data_models/types';
+import { BusinessInfoInput } from '../../models/data_models/types';
 import { BaseBusinessImageProvider } from './baseBusinessImageProvider';
 import { GooglePlacesApiUtils } from '../../utils/googlePlacesApiUtils';
 import { Image, ImageProviderName } from '../../models/data_models/image';
