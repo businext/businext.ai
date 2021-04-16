@@ -5,34 +5,32 @@ import { AssignedLabel, DetectedObject, Coordinate } from '../../models/data_mod
 import * as vision from '@google-cloud/vision';
 
 const enum requestTypes {
-	labelDetection = 'LABEL_DETECTION',
-	objectLocalization = 'OBJECT_LOCALIZATION',
+	LabelDetection = 'LABEL_DETECTION',
+	ObjectLocalization = 'OBJECT_LOCALIZATION',
 }
 
+type LocalizedObjectAnnotation = vision.protos.google.cloud.vision.v1.ILocalizedObjectAnnotation;
+type EntityAnnotation = vision.protos.google.cloud.vision.v1.IEntityAnnotation;
+type NormalizedVertex = vision.protos.google.cloud.vision.v1.INormalizedVertex;
+
 export class VisionExtractionProvider implements ExtractionProvider {
-	protected createAssignedLabel(
-		label: vision.protos.google.cloud.vision.v1.IEntityAnnotation
-	): AssignedLabel {
+	protected createAssignedLabel(label: EntityAnnotation): AssignedLabel {
 		return {
 			description: label?.description || '',
 			confidence: label?.score || 0,
 		};
 	}
 
-	protected createBoundingPoly(
-		boundingPoly: vision.protos.google.cloud.vision.v1.INormalizedVertex
-	): Coordinate {
+	protected static createBoundingVertex(coordinate: NormalizedVertex): Coordinate {
 		return {
-			x: boundingPoly?.x || 0,
-			y: boundingPoly?.y || 0,
+			x: coordinate?.x || 0,
+			y: coordinate?.y || 0,
 		};
 	}
 
-	protected createDetectedObject(
-		object: vision.protos.google.cloud.vision.v1.ILocalizedObjectAnnotation
-	): DetectedObject {
-		const bounding_poly: Array<Coordinate> = object.boundingPoly!.normalizedVertices!.map((coord) =>
-			this.createBoundingPoly(coord)
+	protected createDetectedObject(object: LocalizedObjectAnnotation): DetectedObject {
+		const bounding_poly: Array<Coordinate> = object.boundingPoly!.normalizedVertices!.map(
+			VisionExtractionProvider.createBoundingVertex.bind(this)
 		);
 		return {
 			object_name: object?.name || '',
@@ -45,12 +43,12 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		const client = new vision.ImageAnnotatorClient();
 		const request = {
 			image: { source: { imageUri: image.source } },
-			features: [{ type: requestTypes.labelDetection }, { type: requestTypes.objectLocalization }],
+			features: [{ type: requestTypes.LabelDetection }, { type: requestTypes.ObjectLocalization }],
 		};
 
 		const [results] = await client.annotateImage(request);
-		const labels = results.labelAnnotations!;
-		const objects = results.localizedObjectAnnotations!;
+		const labels = results.labelAnnotations || [];
+		const objects = results.localizedObjectAnnotations || [];
 
 		const assignedLabels = labels.map((label) => this.createAssignedLabel(label));
 		const detectedObjects = objects.map((object) => this.createDetectedObject(object));
