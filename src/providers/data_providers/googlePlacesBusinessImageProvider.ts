@@ -10,16 +10,26 @@ export class GooglePlacesBusinessImageProvider extends BaseBusinessImageProvider
 			.getPlaceID(businessInfo.address, businessInfo.name)
 			.then((id) => googlePlacesApi.getPlaceDetails(id))
 			.then((photoRefs) =>
-				Promise.all(photoRefs.map((photoRef) => googlePlacesApi.getPhoto(photoRef)).filter((x) => x))
+				Promise.all(
+					photoRefs.map((photoRef) => {
+						return googlePlacesApi.getPhoto(photoRef);
+					})
+				)
 			)
 			.then((photoUrls) =>
-				photoUrls.map(
-					(url: any) =>
-						<Image>{
-							source: url,
-							provider: ImageProviderName.google_places,
-						}
-				)
-			);
+				photoUrls
+					.filter((x) => x)
+					.map(
+						(url) =>
+							<Image>{
+								source: url,
+								provider: ImageProviderName.google_places,
+							}
+					)
+			)
+			.catch((err) => {
+				console.error(err);
+				return [];
+			});
 	}
 }

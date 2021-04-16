@@ -22,7 +22,7 @@ export class GooglePlacesApiUtils {
 				key: this.apiKey,
 			},
 		});
-		const id = response?.data?.candidates?.[0].place_id;
+		const id = response?.data?.candidates?.[0]?.place_id;
 		if (id === undefined) throw Error('Cannot find place id for address');
 		return id;
 	}
@@ -43,16 +43,20 @@ export class GooglePlacesApiUtils {
 	}
 
 	public async getPhoto(photoRef: string): Promise<string | undefined> {
-		const response = await this.googlePlacesApiClient.placePhoto({
-			params: {
-				photoreference: photoRef,
-				key: this.apiKey,
-				maxheight: 500 /* These hardcoded values can probably be configurations, there is a set minimum and a maximum though */,
-				maxwidth: 500,
-			},
-			responseType: 'stream',
-		});
-		const responseUrl: string = response?.data.responseUrl;
-		return responseUrl;
+		try {
+			const response = await this.googlePlacesApiClient.placePhoto({
+				params: {
+					photoreference: photoRef,
+					key: this.apiKey,
+					maxheight: 500 /* These hardcoded values can probably be configurations, there is a set minimum and a maximum though */,
+					maxwidth: 500,
+				},
+				responseType: 'stream',
+			});
+			return response.data.responseUrl;
+		} catch {
+			console.error(`Google get photo error on photo ref: ${photoRef}`);
+			return undefined;
+		}
 	}
 }
