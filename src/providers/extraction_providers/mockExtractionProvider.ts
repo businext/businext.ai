@@ -2,7 +2,7 @@ import { ExtractionProvider } from './extractionProvider';
 import { Image, ExtractedImage } from '../../models/data_models/image';
 
 export class MockExtractionProvider implements ExtractionProvider {
-	extract(images: Array<Image>): Array<ExtractedImage> {
+	public async extract(images: Array<Image>): Promise<Array<ExtractedImage>> {
 		return <Array<ExtractedImage>>[
 			{
 				origin: {
