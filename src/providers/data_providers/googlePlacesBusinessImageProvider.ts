@@ -9,14 +9,14 @@ export class GooglePlacesBusinessImageProvider extends BaseBusinessImageProvider
 		return googlePlacesApi
 			.getPlaceID(businessInfo.address, businessInfo.name)
 			.then((id) => googlePlacesApi.getPlacePhotoRefs(id))
-			.then((photoRefs: Array<string>) =>
+			.then((photoRefs) =>
 				Promise.all(
 					photoRefs.map((photoRef) => {
 						return googlePlacesApi.getPhoto(photoRef);
 					})
 				)
 			)
-			.then((photoUrls: Array<string>) =>
+			.then((photoUrls) =>
 				photoUrls
 					.filter((x) => x)
 					.map(
