@@ -1,11 +1,44 @@
 import { ExtractionProvider } from './extractionProvider';
 import { Image, ExtractedImage } from '../../models/data_models/image';
-import { AssignedLabel, DetectedObject } from '../../models/data_models/extraction';
+import { AssignedLabel, DetectedObject, Coordinate } from '../../models/data_models/extraction';
 
 import vision = require('@google-cloud/vision');
 
 export class VisionExtractionProvider implements ExtractionProvider {
 	// constructor
+
+    protected createAssignedLabel(label: vision.protos.google.cloud.vision.v1.IEntityAnnotation): AssignedLabel {
+        const assignedLabel: AssignedLabel = {
+            description: <string>label.description,
+            confidence: <number>label.confidence
+        }
+        return assignedLabel
+    }
+
+	protected createBoundingPoly(boundingPoly: vision.protos.google.cloud.vision.v1.INormalizedVertex): Coordinate {
+		let x: number = 0;
+		let y: number = 0;
+		if (boundingPoly.x) {
+			x = boundingPoly.x
+		}
+		if (boundingPoly.y) {
+			y = boundingPoly.y
+		}
+		return {
+			x: x,
+			y: y,
+		}
+	}
+
+    protected createDetectedObject(object: vision.protos.google.cloud.vision.v1.ILocalizedObjectAnnotation): DetectedObject {
+        const bounding_poly: Array<Coordinate> = object.boundingPoly!.normalizedVertices!.map((coord) => this.createBoundingPoly(coord))
+        const detectedObject: DetectedObject = {
+            object_name: <string>object.name,
+            confidence: <number>object.score,
+            bounding_poly: bounding_poly,
+        }
+        return detectedObject
+    }
 
 	// helper function for extracting one image at a time
 	protected async extractSingleImage(image: Image): Promise<ExtractedImage> {
@@ -18,10 +51,8 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		const labels = results.labelAnnotations!;
 		const objects = results.localizedObjectAnnotations!;
 
-		// TODO: put each label into the assigned_labels
-		const assignedLabels: Array<AssignedLabel> = [];
-		// TODO: put each object detected into the detected_objects
-		const detectedObjects: Array<DetectedObject> = [];
+		const assignedLabels: Array<AssignedLabel> = labels.map((label) => this.createAssignedLabel(label));
+		const detectedObjects: Array<DetectedObject> = objects.map((object) => this.createDetectedObject(object));
 
 		const extracted: ExtractedImage = {
 			origin: {
@@ -37,9 +68,8 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		return extracted;
 	}
 
-	public extract(images: Array<Image>): Array<ExtractedImage> {
-		let extractedImages: Array<ExtractedImage> = [];
-		// TODO: run extractSingleImage on each image
+	public async extract(images: Array<Image>): Promise<Array<ExtractedImage>> {
+        const extractedImages = Promise.all(images.map((image) => this.extractSingleImage(image)));
 		return extractedImages;
 	}
 }
