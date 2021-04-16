@@ -30,7 +30,7 @@ export class VisionExtractionProvider implements ExtractionProvider {
 
 	protected createDetectedObject(object: LocalizedObjectAnnotation): DetectedObject {
 		const bounding_poly: Array<Coordinate> = object.boundingPoly!.normalizedVertices!.map(
-			VisionExtractionProvider.createBoundingVertex.bind(this)
+			VisionExtractionProvider.createBoundingVertex
 		);
 		return {
 			object_name: object?.name || '',
