@@ -13,9 +13,18 @@ export class VisionExtractionProvider implements ExtractionProvider {
 	protected createAssignedLabel(
 		label: vision.protos.google.cloud.vision.v1.IEntityAnnotation
 	): AssignedLabel {
+		let description = '';
+		let confidence = 0;
+		if (label.description) {
+			description = label.description;
+		}
+		if (label.score) {
+			confidence = label.score;
+		}
+
 		const assignedLabel: AssignedLabel = {
-			description: <string>label.description,
-			confidence: <number>label.confidence,
+			description: description,
+			confidence: confidence,
 		};
 		return assignedLabel;
 	}
@@ -31,10 +40,12 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		if (boundingPoly.y) {
 			y = boundingPoly.y;
 		}
-		return {
+
+		const coordinate: Coordinate = {
 			x: x,
 			y: y,
 		};
+		return coordinate;
 	}
 
 	protected createDetectedObject(
@@ -43,9 +54,18 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		const bounding_poly: Array<Coordinate> = object.boundingPoly!.normalizedVertices!.map((coord) =>
 			this.createBoundingPoly(coord)
 		);
+		let objectName = '';
+		let confidence = 0;
+		if (object.name) {
+			objectName = object.name;
+		}
+		if (object.score) {
+			confidence = object.score;
+		}
+
 		const detectedObject: DetectedObject = {
-			object_name: <string>object.name,
-			confidence: <number>object.score,
+			object_name: objectName,
+			confidence: confidence,
 			bounding_poly: bounding_poly,
 		};
 		return detectedObject;
@@ -57,6 +77,7 @@ export class VisionExtractionProvider implements ExtractionProvider {
 			image: { source: { imageUri: image.source } },
 			features: [{ type: requestTypes.labelDetection }, { type: requestTypes.objectLocalization }],
 		};
+
 		const [results] = await client.annotateImage(request);
 		const labels = results.labelAnnotations!;
 		const objects = results.localizedObjectAnnotations!;
@@ -74,7 +95,6 @@ export class VisionExtractionProvider implements ExtractionProvider {
 				detected_objects: detectedObjects,
 			},
 		};
-
 		return extracted;
 	}
 
