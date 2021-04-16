@@ -27,7 +27,7 @@ export class GooglePlacesApiUtils {
 		return id;
 	}
 
-	public async getPlaceDetails(placeID: string): Promise<Array<string>> {
+	public async getPlacePhotoRefs(placeID: string): Promise<Array<string>> {
 		const response = await this.googlePlacesApiClient.placeDetails({
 			params: {
 				place_id: placeID,

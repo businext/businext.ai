@@ -8,7 +8,7 @@ export class GooglePlacesBusinessImageProvider extends BaseBusinessImageProvider
 		const googlePlacesApi = await new GooglePlacesApiUtils(this.config).init();
 		return googlePlacesApi
 			.getPlaceID(businessInfo.address, businessInfo.name)
-			.then((id) => googlePlacesApi.getPlaceDetails(id))
+			.then((id) => googlePlacesApi.getPlacePhotoRefs(id))
 			.then((photoRefs: Array<string>) =>
 				Promise.all(
 					photoRefs.map((photoRef) => {
