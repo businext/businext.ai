@@ -16,7 +16,7 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		return {
 			description: label?.description || '',
 			confidence: label?.score || 0,
-		}
+		};
 	}
 
 	protected createBoundingPoly(
@@ -25,7 +25,7 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		return {
 			x: boundingPoly?.x || 0,
 			y: boundingPoly?.y || 0,
-		}
+		};
 	}
 
 	protected createDetectedObject(
@@ -38,7 +38,7 @@ export class VisionExtractionProvider implements ExtractionProvider {
 			object_name: object?.name || '',
 			confidence: object?.score || 0,
 			bounding_poly: bounding_poly,
-		}
+		};
 	}
 
 	protected async extractSingleImage(image: Image): Promise<ExtractedImage> {
@@ -69,6 +69,6 @@ export class VisionExtractionProvider implements ExtractionProvider {
 	}
 
 	public async extract(images: Array<Image>): Promise<Array<ExtractedImage>> {
-		return Promise.all(images.map((image) => this.extractSingleImage(image)));;
+		return Promise.all(images.map((image) => this.extractSingleImage(image)));
 	}
 }
