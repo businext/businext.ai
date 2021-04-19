@@ -9,12 +9,10 @@ import { BusinessInfoInput } from '../../models/data_models/types';
 import { defaultConfig, DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
 
 export class BusinessImageProviderAggregator {
-	// load configs here
 	protected dataSourceConfig: DataSourceConfiguration;
 
-	constructor() {
-		this.dataSourceConfig =
-			(process.env.BUSINESS_API_CONFIG && JSON.parse(process.env.BUSINESS_API_CONFIG)) || defaultConfig;
+	constructor(protected config: DataSourceConfiguration) {
+		this.dataSourceConfig = config;
 	}
 
 	private getImageProvider(provider: string): BusinessImageProvider {
