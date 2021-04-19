@@ -10,7 +10,7 @@ export class MockExtractionProvider implements ExtractionProvider {
 					provider: 'YELP',
 				},
 				extractions: {
-					assigned_labels: [
+					assignedLabels: [
 						{
 							description: 'Table',
 							confidence: 0.95860934,
@@ -32,11 +32,11 @@ export class MockExtractionProvider implements ExtractionProvider {
 							confidence: 0.86392134,
 						},
 					],
-					detected_objects: [
+					detectedObjects: [
 						{
-							object_name: 'Lighting',
+							objectName: 'Lighting',
 							confidence: 0.904524,
-							bounding_poly: [
+							boundingPoly: [
 								{
 									x: 0.76475835,
 									y: 0.20335792,
@@ -56,9 +56,9 @@ export class MockExtractionProvider implements ExtractionProvider {
 							],
 						},
 						{
-							object_name: 'Lighting',
+							objectName: 'Lighting',
 							confidence: 0.88767177,
-							bounding_poly: [
+							boundingPoly: [
 								{
 									x: 0.3563818,
 									y: 0.032792393,
@@ -78,9 +78,9 @@ export class MockExtractionProvider implements ExtractionProvider {
 							],
 						},
 						{
-							object_name: 'Lighting',
+							objectName: 'Lighting',
 							confidence: 0.8864915,
-							bounding_poly: [
+							boundingPoly: [
 								{
 									x: 0.3563818,
 									y: 0.13552843,
@@ -100,9 +100,9 @@ export class MockExtractionProvider implements ExtractionProvider {
 							],
 						},
 						{
-							object_name: 'Chair',
+							objectName: 'Chair',
 							confidence: 0.69909143,
-							bounding_poly: [
+							boundingPoly: [
 								{
 									x: 0.37836167,
 									y: 0.72858626,
@@ -122,9 +122,9 @@ export class MockExtractionProvider implements ExtractionProvider {
 							],
 						},
 						{
-							object_name: 'Lighting',
+							objectName: 'Lighting',
 							confidence: 0.69858944,
-							bounding_poly: [
+							boundingPoly: [
 								{
 									x: 0.91422135,
 									y: 0.33225027,
@@ -152,7 +152,7 @@ export class MockExtractionProvider implements ExtractionProvider {
 					provider: 'GOOGLE PLACES',
 				},
 				extractions: {
-					assigned_labels: [
+					assignedLabels: [
 						{
 							description: 'Tableware',
 							confidence: 0.9671577,
@@ -170,11 +170,11 @@ export class MockExtractionProvider implements ExtractionProvider {
 							confidence: 0.9062822,
 						},
 					],
-					detected_objects: [
+					detectedObjects: [
 						{
-							object_name: 'Coffee cup',
+							objectName: 'Coffee cup',
 							confidence: 0.9020074,
-							bounding_poly: [
+							boundingPoly: [
 								{
 									x: 0.28601333,
 									y: 0.4320761,

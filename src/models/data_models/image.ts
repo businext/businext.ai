@@ -13,11 +13,11 @@ export interface Image extends Data {
 
 // A collection of the types of extractions obtainable for an image
 interface ImageExtractionCollection extends Record<string, Array<Extraction>> {
-	assigned_labels: Array<AssignedLabel>;
-	detected_objects: Array<DetectedObject>;
+	assignedLabels: Array<AssignedLabel>;
+	detectedObjects: Array<DetectedObject>;
 }
 
 // An ExtractedImage contains all the extractions for a single image
-// assigned_labels are descriptions given to an image based on general objects, locations, activities, and more.
-// detected_objects are specific objects identified in an image
+// assignedLabels are descriptions given to an image based on general objects, locations, activities, and more.
+// detectedObjects are specific objects identified in an image
 export interface ExtractedImage extends Extracted<Image, ImageExtractionCollection> {}
