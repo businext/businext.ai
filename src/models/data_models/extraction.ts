@@ -14,6 +14,6 @@ export type Coordinate = {
 
 // DetectedObject is an object detected in an extracted image with its location in the image tracked
 export interface DetectedObject extends Extraction {
-	object_name: string;
-	bounding_poly: Array<Coordinate>;
+	objectName: string;
+	boundingPoly: Array<Coordinate>;
 }

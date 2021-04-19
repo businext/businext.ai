@@ -50,14 +50,14 @@ export class Word2VecInterpretationProvider implements InterpretationProvider {
 	}
 
 	protected inferImage(inferences: BusinessInferences, image: ExtractedImage): BusinessInferences {
-		const { assigned_labels, detected_objects } = image.extractions;
+		const { assignedLabels, detectedObjects } = image.extractions;
 		const keywords = new Map<string, Array<Extraction>>();
-		for (const label of assigned_labels) {
+		for (const label of assignedLabels) {
 			const { description: keyword } = label;
 			keywords.get(keyword)?.push(label) || keywords.set(keyword, [label]);
 		}
-		for (const obj of detected_objects) {
-			const { object_name: keyword } = obj;
+		for (const obj of detectedObjects) {
+			const { objectName: keyword } = obj;
 			keywords.get(keyword)?.push(obj) || keywords.set(keyword, [obj]);
 		}
 		console.debug(keywords);

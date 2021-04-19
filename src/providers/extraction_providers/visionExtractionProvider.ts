@@ -31,9 +31,9 @@ export class VisionExtractionProvider implements ExtractionProvider {
 				?.map(VisionExtractionProvider.createBoundingVertex)
 				.filter((coord): coord is Coordinate => coord !== null) ?? [];
 		return {
-			object_name: object?.name ?? '',
+			objectName: object?.name ?? '',
 			confidence: object?.score ?? 0,
-			bounding_poly: boundingPoly,
+			boundingPoly: boundingPoly,
 		};
 	}
 
@@ -57,8 +57,8 @@ export class VisionExtractionProvider implements ExtractionProvider {
 				provider: image.provider,
 			},
 			extractions: {
-				assigned_labels: assignedLabels,
-				detected_objects: detectedObjects,
+				assignedLabels: assignedLabels,
+				detectedObjects: detectedObjects,
 			},
 		};
 		return extracted;

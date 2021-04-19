@@ -57,8 +57,8 @@ export type Image = {
 
 export type ImageExtractionCollection = {
   __typename?: 'ImageExtractionCollection';
-  assigned_labels?: Maybe<Array<AssignedLabel>>;
-  detected_objects?: Maybe<Array<DetectedObject>>;
+  assignedLabels?: Maybe<Array<AssignedLabel>>;
+  detectedObjects?: Maybe<Array<DetectedObject>>;
 };
 
 export type AssignedLabel = {
@@ -70,9 +70,9 @@ export type AssignedLabel = {
 
 export type DetectedObject = {
   __typename?: 'DetectedObject';
-  bounding_polygon?: Maybe<Array<Coordinate>>;
+  boundingPolygon?: Maybe<Array<Coordinate>>;
   confidence: Scalars['Float'];
-  object_name: Scalars['String'];
+  objectName: Scalars['String'];
 };
 
 export type Coordinate = {
