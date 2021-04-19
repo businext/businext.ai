@@ -3,8 +3,8 @@ import { MockExtractionProvider } from './mockExtractionProvider';
 import { VisionExtractionProvider } from './visionExtractionProvider'
 
 export const enum ExtractionProviderName {
-	mock = 'MOCK',
-	googleVision = 'GOOGLEVISION',
+	Mock = 'MOCK',
+	GoogleVision = 'GOOGLEVISION',
 }
 
 export interface ExtractionConfig {
