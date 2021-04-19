@@ -16,8 +16,8 @@ type NormalizedVertex = vision.protos.google.cloud.vision.v1.INormalizedVertex;
 export class VisionExtractionProvider implements ExtractionProvider {
 	protected createAssignedLabel(label: EntityAnnotation): AssignedLabel {
 		return {
-			description: label?.description || '',
-			confidence: label?.score || 0,
+			description: label?.description ?? '',
+			confidence: label?.score ?? 0,
 		};
 	}
 
@@ -32,8 +32,8 @@ export class VisionExtractionProvider implements ExtractionProvider {
 				?.map(VisionExtractionProvider.createBoundingVertex)
 				.filter((coord): coord is Coordinate => coord !== null) ?? [];
 		return {
-			object_name: object?.name || '',
-			confidence: object?.score || 0,
+			object_name: object?.name ?? '',
+			confidence: object?.score ?? 0,
 			bounding_poly: boundingPoly,
 		};
 	}
