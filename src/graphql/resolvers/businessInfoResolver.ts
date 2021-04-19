@@ -5,6 +5,7 @@ import {
 } from '../../providers/extraction_providers/extractionProviderFactory';
 import { getInterpretationProvider, InterpretationConfig } from '../../providers/interpretation_providers';
 import { BusinessInferences, QueryGetBusinessInfoArgs } from '../generatedTypes';
+import { defaultConfig, DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
 
 export async function getBusinessInfo(
 	_: unknown,
@@ -14,12 +15,15 @@ export async function getBusinessInfo(
 	if (!process.env.INTERPRETATION_CONFIG)
 		throw new Error('Undefined environment variable INTERPRETATION_CONFIG');
 
+	const dataProviderConfig: DataSourceConfiguration =
+		(process.env.BUSINESS_API_CONFIG && JSON.parse(process.env.BUSINESS_API_CONFIG)) || defaultConfig;
+
 	const extractionConfig: ExtractionConfig = JSON.parse(process.env.EXTRACTION_CONFIG);
 	const interpretationConfig: InterpretationConfig = JSON.parse(process.env.INTERPRETATION_CONFIG);
 
 	const businessInfo = businessInfoQuery.businessInfoInput;
 
-	const images = await new BusinessImageProviderAggregator().getImages(businessInfo);
+	const images = await new BusinessImageProviderAggregator(dataProviderConfig).getImages(businessInfo);
 	const extractions = await getExtractionProvider(extractionConfig).extract(images);
 	const interpretations = await getInterpretationProvider(interpretationConfig).then((provider) =>
 		provider.interpret({ images: extractions })
