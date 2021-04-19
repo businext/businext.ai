@@ -17,7 +17,7 @@ export async function getBusinessInfo(_: any, args: QueryGetBusinessInfoArgs): P
 	const businessInfo = args.businessInfoInput;
 
 	const images = await new BusinessImageProviderAggregator().getImages(businessInfo);
-	const extractions = getExtractionProvider(extractionConfig).extract(images);
+	const extractions = await getExtractionProvider(extractionConfig).extract(images);
 	const interpretations = await getInterpretationProvider(interpretationConfig).then((provider) =>
 		provider.interpret({ images: extractions })
 	);
