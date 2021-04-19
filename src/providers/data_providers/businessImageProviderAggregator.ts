@@ -19,11 +19,11 @@ export class BusinessImageProviderAggregator {
 
 	private getImageProvider(provider: string): BusinessImageProvider {
 		switch (provider) {
-			case ImageProviderName.mock:
+			case ImageProviderName.Mock:
 				return new MockBusinessImageProvider(this.dataSourceConfig);
-			case ImageProviderName.yelp:
+			case ImageProviderName.Yelp:
 				return new YelpBusinessImageProvider(this.dataSourceConfig);
-			case ImageProviderName.google_places:
+			case ImageProviderName.GooglePlaces:
 				return new GooglePlacesBusinessImageProvider(this.dataSourceConfig);
 			default:
 				throw Error(`${provider} is not a valid name for an interpretation provider`);

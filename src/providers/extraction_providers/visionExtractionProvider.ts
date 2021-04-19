@@ -3,7 +3,7 @@ import { Image, ExtractedImage } from '../../models/data_models/image';
 import { AssignedLabel, DetectedObject, Coordinate } from '../../models/data_models/extraction';
 import * as vision from '@google-cloud/vision';
 
-const enum requestTypes {
+const enum RequestTypes {
 	LabelDetection = 'LABEL_DETECTION',
 	ObjectLocalization = 'OBJECT_LOCALIZATION',
 }
@@ -41,7 +41,7 @@ export class VisionExtractionProvider implements ExtractionProvider {
 		const client = new vision.ImageAnnotatorClient();
 		const request = {
 			image: { source: { imageUri: image.source } },
-			features: [{ type: requestTypes.LabelDetection }, { type: requestTypes.ObjectLocalization }],
+			features: [{ type: RequestTypes.LabelDetection }, { type: RequestTypes.ObjectLocalization }],
 		};
 
 		const [results] = (await client.annotateImage(request)) ?? [];

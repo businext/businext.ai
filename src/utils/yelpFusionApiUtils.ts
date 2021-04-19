@@ -31,7 +31,7 @@ export class YelpFusionApiUtils {
 						(photo: any) =>
 							<Image>{
 								source: photo,
-								provider: ImageProviderName.yelp,
+								provider: ImageProviderName.Yelp,
 							}
 					)
 				))) ||

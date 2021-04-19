@@ -3,8 +3,8 @@ import { MockConfig, MockInterpretationProvider } from './mockInterpretationProv
 import { Word2VecConfig, Word2VecInterpretationProvider } from './word2vecInterpretationProvider';
 
 export const enum InterpretationProviderName {
-	mock = 'MOCK',
-	word2vec = 'WORD2VEC',
+	Mock = 'MOCK',
+	Word2Vec = 'WORD2VEC',
 }
 
 export interface InterpretationConfig {
@@ -12,13 +12,15 @@ export interface InterpretationConfig {
 	interpretationProviderConfig: MockConfig | Word2VecConfig;
 }
 
-export const getInterpretationProvider = async (config: InterpretationConfig): Promise<InterpretationProvider> => {
+export const getInterpretationProvider = async (
+	config: InterpretationConfig
+): Promise<InterpretationProvider> => {
 	const { interpretationProviderName: name } = config;
 	switch (name) {
-		case InterpretationProviderName.mock:
+		case InterpretationProviderName.Mock:
 			const mockConfig = config.interpretationProviderConfig as MockConfig;
 			return MockInterpretationProvider.from(mockConfig);
-		case InterpretationProviderName.word2vec:
+		case InterpretationProviderName.Word2Vec:
 			const word2vecConfig = config.interpretationProviderConfig as Word2VecConfig;
 			return Word2VecInterpretationProvider.from(word2vecConfig);
 		default:

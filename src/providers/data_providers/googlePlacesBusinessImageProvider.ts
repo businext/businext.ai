@@ -23,7 +23,7 @@ export class GooglePlacesBusinessImageProvider extends BaseBusinessImageProvider
 						(url) =>
 							<Image>{
 								source: url,
-								provider: ImageProviderName.google_places,
+								provider: ImageProviderName.GooglePlaces,
 							}
 					)
 			)
