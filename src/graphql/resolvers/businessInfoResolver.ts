@@ -15,7 +15,7 @@ export async function getBusinessInfo(businessInfo: BusinessInfoInput): Promise<
 	const interpretationConfig: InterpretationConfig = JSON.parse(process.env.INTERPRETATION_CONFIG);
 
 	const images = await new BusinessImageProviderAggregator().getImages(businessInfo);
-	const extractions = getExtractionProvider(extractionConfig).extract(images);
+	const extractions = await getExtractionProvider(extractionConfig).extract(images);
 	const interpretations = await getInterpretationProvider(interpretationConfig).then((provider) =>
 		provider.interpret({ images: extractions })
 	);
