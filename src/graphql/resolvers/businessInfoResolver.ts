@@ -7,7 +7,7 @@ import { getInterpretationProvider, InterpretationConfig } from '../../providers
 import { BusinessInferences, QueryGetBusinessInfoArgs } from '../generatedTypes';
 
 export async function getBusinessInfo(
-	_: any,
+	_: unknown,
 	businessInfoQuery: QueryGetBusinessInfoArgs
 ): Promise<BusinessInferences> {
 	if (!process.env.EXTRACTION_CONFIG) throw new Error('Undefined environment variable EXTRACTION_CONFIG');
