@@ -1,7 +1,6 @@
 import { ExtractionProvider } from './extractionProvider';
 import { Image, ExtractedImage } from '../../models/data_models/image';
 import { AssignedLabel, DetectedObject, Coordinate } from '../../models/data_models/extraction';
-
 import * as vision from '@google-cloud/vision';
 
 const enum requestTypes {
@@ -45,9 +44,9 @@ export class VisionExtractionProvider implements ExtractionProvider {
 			features: [{ type: requestTypes.LabelDetection }, { type: requestTypes.ObjectLocalization }],
 		};
 
-		const [results] = (await client.annotateImage(request)) || [];
-		const labels = results.labelAnnotations || [];
-		const objects = results.localizedObjectAnnotations || [];
+		const [results] = (await client.annotateImage(request)) ?? [];
+		const labels = results.labelAnnotations ?? [];
+		const objects = results.localizedObjectAnnotations ?? [];
 
 		const assignedLabels = labels.map((label) => this.createAssignedLabel(label));
 		const detectedObjects = objects.map((object) => this.createDetectedObject(object));
