@@ -5,7 +5,7 @@ import { Image, ImageProviderName } from '../models/data_models/image.js';
 import { Geocode } from '../models/data_models/types.js';
 
 export class YelpFusionApiUtils {
-	protected yelpClient?: YelpClient;
+	protected yelpClient!: YelpClient;
 
 	constructor(protected config: DataSourceConfiguration) {}
 
@@ -17,26 +17,26 @@ export class YelpFusionApiUtils {
 
 	public async getImages(name: string, geocode: Geocode): Promise<Array<Image>> {
 		// calls the api twice to first get the id of the business and then to actually retrieve the photos...
-		const response = await this.yelpClient.search({
-			term: name,
-			latitude: geocode.lat,
-			longitude: geocode.lng,
-		});
-
-		const id = response?.jsonBody?.businesses?.[0]?.id;
-		const images: Array<Image> =
-			(id &&
-				(await this.yelpClient.business(id).then((result: any) =>
-					result.jsonBody?.photos?.map(
-						(photo: any) =>
-							<Image>{
-								source: photo,
-								provider: ImageProviderName.Yelp,
-							}
-					)
-				))) ||
-			[];
-
-		return images;
+		return this.yelpClient
+			.search({
+				term: name,
+				latitude: geocode.lat,
+				longitude: geocode.lng,
+			})
+			.then((response) => response.jsonBody.businesses[0].id)
+			.then((id) => this.yelpClient.business(id))
+			.then((businessResult) =>
+				businessResult.jsonBody.photos.map(
+					(photo) =>
+						<Image>{
+							source: photo,
+							provider: ImageProviderName.Yelp,
+						}
+				)
+			)
+			.catch((err) => {
+				console.error(err);
+				return [];
+			});
 	}
 }
