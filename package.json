@@ -26,6 +26,7 @@
 		"generateTypes": "graphql-codegen --config codegen.yml"
 	},
 	"dependencies": {
+		"@google-cloud/vision": "^2.3.1",
 		"@googlemaps/google-maps-services-js": "^3.1.16",
 		"@graphql-tools/graphql-file-loader": "^6.2.7",
 		"@graphql-tools/load": "^6.2.8",
