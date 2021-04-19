@@ -34,8 +34,8 @@ type Image {
 }
 
 type ImageExtractionCollection {
-	assigned_labels: [AssignedLabel!]
-	detected_objects: [DetectedObject!]
+	assignedLabels: [AssignedLabel!]
+	detectedObjects: [DetectedObject!]
 }
 
 type AssignedLabel {
@@ -46,8 +46,8 @@ type AssignedLabel {
 
 type DetectedObject {
 	confidence: Float!
-	object_name: String!
-	bounding_polygon: [Coordinate!]
+	objectName: String!
+	boundingPolygon: [Coordinate!]
 }
 
 type Coordinate {
