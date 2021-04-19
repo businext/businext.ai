@@ -3,28 +3,27 @@
 	"version": "0.0.0",
 	"private": true,
 	"description": "Business Insight Extractor and Interpreter",
-	"main": "lib/index.js",
-	"scripts": {
-		"build": "tsc && npm run copySchema",
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node lib",
-		"start:dev": "concurrently 'tsc --watch' 'nodemon lib --ext js,graphql'",
-		"copySchema": "cp --recursive src/graphql/schema/ lib/graphql",
-		"generateTypes": "graphql-codegen --config codegen.yml"
+	"bugs": {
+		"url": "https://github.com/businext/businext.ai/issues"
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/businext/businext.ai.git"
 	},
+	"license": "ISC",
 	"contributors": [
 		"Joshua Cheng <josh510cheng@gmail.com>",
 		"Benny Lam <bennylam6@gmail.com>",
 		"Justin Xu <xu.justin.j@gmail.com>",
 		"Tim Zwart <timrzwart@gmail.com>"
 	],
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/businext/businext.ai/issues"
+	"main": "lib/index.js",
+	"scripts": {
+		"build": "tsc && npm run copySchema",
+		"start": "node lib",
+		"start:dev": "concurrently 'tsc --watch' 'nodemon lib --ext js,graphql'",
+		"copySchema": "cp --recursive src/graphql/schema/ lib/graphql",
+		"generateTypes": "graphql-codegen --config codegen.yml"
 	},
 	"dependencies": {
 		"@googlemaps/google-maps-services-js": "^3.1.16",
