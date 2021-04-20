@@ -6,7 +6,7 @@ import { YelpBusinessImageProvider } from './yelpBusinessImageProvider';
 import { OpenCageApiUtils } from '../../utils/openCageApiUtils';
 import { Image } from '../../models/data_models/image';
 import { BusinessInfoInput } from '../../models/data_models/types';
-import { defaultConfig, DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
+import { DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
 
 export class BusinessImageProviderAggregator {
 	constructor(protected dataSourceConfig: DataSourceConfiguration) {}
