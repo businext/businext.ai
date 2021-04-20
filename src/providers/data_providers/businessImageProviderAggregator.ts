@@ -9,11 +9,7 @@ import { BusinessInfoInput } from '../../models/data_models/types';
 import { defaultConfig, DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
 
 export class BusinessImageProviderAggregator {
-	protected dataSourceConfig: DataSourceConfiguration;
-
-	constructor(protected config: DataSourceConfiguration) {
-		this.dataSourceConfig = config;
-	}
+	constructor(protected dataSourceConfig: DataSourceConfiguration) {}
 
 	private getImageProvider(provider: string): BusinessImageProvider {
 		switch (provider) {
