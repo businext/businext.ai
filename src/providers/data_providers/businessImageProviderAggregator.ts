@@ -6,24 +6,18 @@ import { YelpBusinessImageProvider } from './yelpBusinessImageProvider';
 import { OpenCageApiUtils } from '../../utils/openCageApiUtils';
 import { Image } from '../../models/data_models/image';
 import { BusinessInfoInput } from '../../models/data_models/types';
-import { defaultConfig, DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
+import { DataSourceConfiguration } from '../../models/data_models/dataSourceConfiguration';
 
 export class BusinessImageProviderAggregator {
-	// load configs here
-	protected dataSourceConfig: DataSourceConfiguration;
-
-	constructor() {
-		this.dataSourceConfig =
-			(process.env.BUSINESS_API_CONFIG && JSON.parse(process.env.BUSINESS_API_CONFIG)) || defaultConfig;
-	}
+	constructor(protected dataSourceConfig: DataSourceConfiguration) {}
 
 	private getImageProvider(provider: string): BusinessImageProvider {
 		switch (provider) {
-			case ImageProviderName.mock:
+			case ImageProviderName.Mock:
 				return new MockBusinessImageProvider(this.dataSourceConfig);
-			case ImageProviderName.yelp:
+			case ImageProviderName.Yelp:
 				return new YelpBusinessImageProvider(this.dataSourceConfig);
-			case ImageProviderName.google_places:
+			case ImageProviderName.GooglePlaces:
 				return new GooglePlacesBusinessImageProvider(this.dataSourceConfig);
 			default:
 				throw Error(`${provider} is not a valid name for an interpretation provider`);

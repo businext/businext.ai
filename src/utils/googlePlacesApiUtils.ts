@@ -3,17 +3,28 @@ import { Client } from '@googlemaps/google-maps-services-js';
 import { PlaceInputType } from '@googlemaps/google-maps-services-js/dist/common';
 
 export class GooglePlacesApiUtils {
-	protected googlePlacesApiClient!: Client;
-	protected apiKey: string = '';
+	private static photoMaxHeight = 1600; /* this is the max width and height*/
+	private static photoMaxWidth = 1600;
 
-	private photoMaxHeight: number = 500; /* These hardcoded values can probably be configurations, there is a set minimum and a maximum though */
-	private photoMaxWidth: number = 500;
-	constructor(protected config: DataSourceConfiguration) {}
+	private constructor(
+		protected googlePlacesApiClient: Client,
+		protected apiKey: string,
+		protected photoHeight: number,
+		protected photoWidth: number
+	) {}
 
-	public async init(): Promise<this> {
-		this.apiKey = this.config.googlePlaces.apiKey;
-		this.googlePlacesApiClient = new Client({});
-		return this;
+	static async from(config: DataSourceConfiguration): Promise<GooglePlacesApiUtils> {
+		const photoWidth = process.env.GOOGLE_PHOTO_WIDTH
+			? parseInt(process.env.GOOGLE_PHOTO_WIDTH)
+			: GooglePlacesApiUtils.photoMaxWidth;
+
+		const photoHeight = process.env.GOOGLE_PHOTO_HEIGHT
+			? parseInt(process.env.GOOGLE_PHOTO_HEIGHT)
+			: GooglePlacesApiUtils.photoMaxHeight;
+
+		const apiKey = config.googlePlaces.apiKey;
+
+		return new GooglePlacesApiUtils(new Client({}), apiKey, photoHeight, photoWidth);
 	}
 
 	public async getPlaceID(address: string, name?: string): Promise<string> {
@@ -50,8 +61,8 @@ export class GooglePlacesApiUtils {
 				params: {
 					photoreference: photoRef,
 					key: this.apiKey,
-					maxheight: this.photoMaxHeight,
-					maxwidth: this.photoMaxWidth,
+					maxheight: this.photoHeight,
+					maxwidth: this.photoWidth,
 				},
 				responseType: 'stream',
 			});
