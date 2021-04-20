@@ -3,26 +3,28 @@ import { Client } from '@googlemaps/google-maps-services-js';
 import { PlaceInputType } from '@googlemaps/google-maps-services-js/dist/common';
 
 export class GooglePlacesApiUtils {
-	protected googlePlacesApiClient!: Client;
-	protected apiKey: string = '';
-
 	private static photoMaxHeight = 1600; /* this is the max width and height*/
 	private static photoMaxWidth = 1600;
 
-	private photoHeight: number = process.env.GOOGLE_PHOTO_HEIGHT
-		? parseInt(process.env.GOOGLE_PHOTO_HEIGHT)
-		: GooglePlacesApiUtils.photoMaxHeight;
+	private constructor(
+		protected googlePlacesApiClient: Client,
+		protected apiKey: string,
+		protected photoHeight: number,
+		protected photoWidth: number
+	) {}
 
-	private photoWidth: number = process.env.GOOGLE_PHOTO_WIDTH
-		? parseInt(process.env.GOOGLE_PHOTO_WIDTH)
-		: GooglePlacesApiUtils.photoMaxWidth;
+	static async from(config: DataSourceConfiguration): Promise<GooglePlacesApiUtils> {
+		const photoWidth = process.env.GOOGLE_PHOTO_WIDTH
+			? parseInt(process.env.GOOGLE_PHOTO_WIDTH)
+			: GooglePlacesApiUtils.photoMaxWidth;
 
-	constructor(protected config: DataSourceConfiguration) {}
+		const photoHeight = process.env.GOOGLE_PHOTO_HEIGHT
+			? parseInt(process.env.GOOGLE_PHOTO_HEIGHT)
+			: GooglePlacesApiUtils.photoMaxHeight;
 
-	public async init(): Promise<this> {
-		this.apiKey = this.config.googlePlaces.apiKey;
-		this.googlePlacesApiClient = new Client({});
-		return this;
+		const apiKey = config.googlePlaces.apiKey;
+
+		return new GooglePlacesApiUtils(new Client({}), apiKey, photoHeight, photoWidth);
 	}
 
 	public async getPlaceID(address: string, name?: string): Promise<string> {
