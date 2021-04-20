@@ -5,14 +5,10 @@ import { Image, ImageProviderName } from '../models/data_models/image.js';
 import { Geocode } from '../models/data_models/types.js';
 
 export class YelpFusionApiUtils {
-	protected yelpClient!: YelpClient;
+	private constructor(protected config: DataSourceConfiguration, protected yelpClient: YelpClient) {}
 
-	constructor(protected config: DataSourceConfiguration) {}
-
-	public async init(): Promise<this> {
-		const apiKey = this.config.yelp.apiKey;
-		this.yelpClient = yelp.client(apiKey);
-		return this;
+	static async from(config: DataSourceConfiguration): Promise<YelpFusionApiUtils> {
+		return new YelpFusionApiUtils(config, yelp.client(config.yelp.apiKey));
 	}
 
 	public async getImages(name: string, geocode: Geocode): Promise<Array<Image>> {
