@@ -19,18 +19,18 @@ export class YelpFusionApiUtils {
 				latitude: geocode.lat,
 				longitude: geocode.lng,
 			})
-			.then((response) => response.jsonBody.businesses[0].id)
-			.then((id) => this.yelpClient.business(id))
-			.then((businessResult) =>
+			.then((response: any) => response.jsonBody.businesses[0].id)
+			.then((id: string) => this.yelpClient.business(id))
+			.then((businessResult: any) =>
 				businessResult.jsonBody.photos.map(
-					(photo) =>
+					(photo: string) =>
 						<Image>{
 							source: photo,
 							provider: ImageProviderName.Yelp,
 						}
 				)
 			)
-			.catch((err) => {
+			.catch((err: any) => {
 				console.error(err);
 				return [];
 			});
