@@ -1,6 +1,29 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:9.6
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=keystone
+      - POSTGRES_PASSWORD=keystone
+      - POSTGRES_DB=keystone
+    ports:
+      - '5432:5432'
+
+  keystone:
+    image: keystone:latest
+    build:
+      context: persistent-data-provider
+    restart: unless-stopped
+    env_file:
+      - persistent-data-provider/.env
+    ports:
+      - '3000:3000'
+    command: npm run dev
+    depends_on:
+      - postgres
+
   businext_bot:
     image: businext:latest
     build:
@@ -17,3 +40,5 @@ services:
     ports:
       - '${LOCAL_ENDPOINT_PORT:-4000}:${ENDPOINT_PORT:-4000}'
     command: npm run start:dev
+    depends_on:
+      - keystone
