@@ -7,6 +7,7 @@ export const lists = createSchema({
 			name: text(),
 			address: text(),
 			lastUpdated: timestamp(),
+			businessInferences: text(),
 		},
 	}),
 });
