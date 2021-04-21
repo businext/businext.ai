@@ -29,7 +29,7 @@ async function fetchFromDB(
 	const client = new GraphQLClient(endpoint);
 	return client
 		.request(query, variables)
-		.then((x) => <BusinessInferences>JSON.parse(x.allBusinesses[0].businessInferences))
+		.then((response) => <BusinessInferences>JSON.parse(response.allBusinesses[0].businessInferences))
 		.catch(() => {
 			return undefined;
 		});
