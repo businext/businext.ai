@@ -4,6 +4,7 @@ type Business {
   name: String
   address: String
   lastUpdated: String
+  businessInferences: String
 }
 
 input BusinessWhereInput {
@@ -61,6 +62,24 @@ input BusinessWhereInput {
   lastUpdated_gte: String
   lastUpdated_in: [String]
   lastUpdated_not_in: [String]
+  businessInferences: String
+  businessInferences_not: String
+  businessInferences_contains: String
+  businessInferences_not_contains: String
+  businessInferences_starts_with: String
+  businessInferences_not_starts_with: String
+  businessInferences_ends_with: String
+  businessInferences_not_ends_with: String
+  businessInferences_i: String
+  businessInferences_not_i: String
+  businessInferences_contains_i: String
+  businessInferences_not_contains_i: String
+  businessInferences_starts_with_i: String
+  businessInferences_not_starts_with_i: String
+  businessInferences_ends_with_i: String
+  businessInferences_not_ends_with_i: String
+  businessInferences_in: [String]
+  businessInferences_not_in: [String]
 }
 
 input BusinessWhereUniqueInput {
@@ -76,12 +95,15 @@ enum SortBusinessesBy {
   address_DESC
   lastUpdated_ASC
   lastUpdated_DESC
+  businessInferences_ASC
+  businessInferences_DESC
 }
 
 input BusinessUpdateInput {
   name: String
   address: String
   lastUpdated: String
+  businessInferences: String
 }
 
 input BusinessesUpdateInput {
@@ -93,6 +115,7 @@ input BusinessCreateInput {
   name: String
   address: String
   lastUpdated: String
+  businessInferences: String
 }
 
 input BusinessesCreateInput {

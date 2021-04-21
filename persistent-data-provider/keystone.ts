@@ -3,7 +3,7 @@ import { statelessSessions, withItemData } from '@keystone-next/keystone/session
 
 import { lists } from './schema';
 
-const sessionSecret = process.env.SESSION_SECRET;
+let sessionSecret = process.env.SESSION_SECRET;
 
 if (!sessionSecret) {
 	if (process.env.NODE_ENV === 'production') {
