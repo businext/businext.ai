@@ -28,6 +28,9 @@
 	"dependencies": {
 		"@google-cloud/vision": "^2.3.1",
 		"@googlemaps/google-maps-services-js": "^3.1.16",
+		"@graphql-mesh/cli": "^0.29.2",
+		"@graphql-mesh/graphql": "^0.16.1",
+		"@graphql-mesh/runtime": "^0.13.4",
 		"@graphql-tools/graphql-file-loader": "^6.2.7",
 		"@graphql-tools/load": "^6.2.8",
 		"@graphql-tools/schema": "^7.1.3",

@@ -1,0 +1,11 @@
+sources:
+  - name: Keystone
+    handler:
+      graphql:
+        endpoint: localhost:3000/api/graphql
+transforms:
+    - extend: ./src/graphql/schema/schema.graphql
+require:
+  - ts-node/register/transpile-only
+additionalResolvers:
+  - ./src/graphql/resolvers/resolvers.ts
