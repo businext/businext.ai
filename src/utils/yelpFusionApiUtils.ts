@@ -20,10 +20,10 @@ export class YelpFusionApiUtils {
 				longitude: geocode.lng,
 			})
 			.then((response: any) => response.jsonBody.businesses[0].id)
-			.then((id: any) => this.yelpClient.business(id))
+			.then((id: string) => this.yelpClient.business(id))
 			.then((businessResult: any) =>
 				businessResult.jsonBody.photos.map(
-					(photo: any) =>
+					(photo: string) =>
 						<Image>{
 							source: photo,
 							provider: ImageProviderName.Yelp,
