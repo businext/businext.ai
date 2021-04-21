@@ -9,8 +9,10 @@ import { defaultConfig, DataSourceConfiguration } from '../../models/data_models
 import { BusinessInfoInput } from '../../models/data_models/types';
 import { GraphQLClient, gql } from 'graphql-request';
 
-async function fetchFromDB(businessInfo: BusinessInfoInput): Promise<BusinessInferences | undefined> {
-	const endpoint = 'http://host.docker.internal:3000/api/graphql';
+async function fetchFromDB(
+	endpoint: string,
+	businessInfo: BusinessInfoInput
+): Promise<BusinessInferences | undefined> {
 	const query = gql`
 		query getInfo($name: String!, $address: String!) {
 			allBusinesses(where: { name: $name, address: $address }) {
@@ -31,8 +33,7 @@ async function fetchFromDB(businessInfo: BusinessInfoInput): Promise<BusinessInf
 			return undefined;
 		});
 }
-function addToDB(businessInfo: BusinessInfoInput, businessInsights: BusinessInferences) {
-	const endpoint = 'http://host.docker.internal:3000/api/graphql';
+function addToDB(endpoint: string, businessInfo: BusinessInfoInput, businessInsights: BusinessInferences) {
 	const query = gql`
 		mutation create($name: String!, $address: String!, $businessInferences: String!) {
 			createBusiness(data: { name: $name, address: $address, businessInferences: $businessInferences }) {
@@ -59,7 +60,9 @@ export async function getBusinessInfo(
 	if (!process.env.EXTRACTION_CONFIG) throw new Error('Undefined environment variable EXTRACTION_CONFIG');
 	if (!process.env.INTERPRETATION_CONFIG)
 		throw new Error('Undefined environment variable INTERPRETATION_CONFIG');
+	if (!process.env.DB_API_URL) throw new Error('Undefined environment variable DB_API_URL');
 
+	const dbEndpoint = process.env.DB_API_URL;
 	const dataProviderConfig: DataSourceConfiguration =
 		(process.env.BUSINESS_API_CONFIG && JSON.parse(process.env.BUSINESS_API_CONFIG)) || defaultConfig;
 
@@ -68,7 +71,7 @@ export async function getBusinessInfo(
 
 	const businessInfo = businessInfoQuery.businessInfoInput;
 
-	const dbFetch = await fetchFromDB(businessInfo);
+	const dbFetch = await fetchFromDB(dbEndpoint, businessInfo);
 	if (dbFetch) {
 		// fetched interpretation from database
 		return dbFetch;
@@ -78,7 +81,7 @@ export async function getBusinessInfo(
 		const interpretations = await getInterpretationProvider(interpretationConfig).then((provider) =>
 			provider.interpret({ images: extractions })
 		);
-		addToDB(businessInfo, interpretations);
+		addToDB(dbEndpoint, businessInfo, interpretations);
 		return interpretations;
 	}
 }
