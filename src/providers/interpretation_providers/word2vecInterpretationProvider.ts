@@ -1,5 +1,6 @@
 // @ts-ignore (TODO: add a .d.ts file to give w2v proper types)
 import w2v from 'word2vec';
+import memoize from 'fast-memoize';
 import { promisify } from 'util';
 import { InterpretationProvider, BusinessInferences, InterpretationParams } from './interpretationProvider';
 import { Extraction } from '../../models';
@@ -11,7 +12,12 @@ export interface Word2VecConfig {
 }
 
 export class Word2VecInterpretationProvider implements InterpretationProvider {
-	private constructor(protected model: any, protected similarityThreshold: number) {}
+	private constructor(
+		protected readonly model: any,
+		protected readonly similarityThreshold: number,
+	) {
+		this.isAlcoholic = memoize(this.isAlcoholic.bind(this));
+	}
 
 	static async from(config: Word2VecConfig): Promise<Word2VecInterpretationProvider> {
 		const { modelName, similarityThreshold } = config;
@@ -33,20 +39,19 @@ export class Word2VecInterpretationProvider implements InterpretationProvider {
 		'cocktail',
 		'wine',
 	];
-	protected static nonAlcoholicWords: ReadonlySet<string> = new Set([
-		'coffee',
-		'non-alcoholic',
-	])
+	protected static nonAlcoholicWords: ReadonlySet<string> = new Set(['coffee', 'non-alcoholic']);
 	protected isAlcoholic(text: string): boolean {
 		const words = text.toLowerCase().split(' ');
-		return (
-			!words.some((word) => Word2VecInterpretationProvider.nonAlcoholicWords.has(word))
-			&& words.some((word) =>
+		const textIsAlcoholic = (
+			!words.some((word) => Word2VecInterpretationProvider.nonAlcoholicWords.has(word)) &&
+			words.some((word) =>
 				Word2VecInterpretationProvider.alcoholicWords.some((alcoholicWord) =>
 					this.similar(word, alcoholicWord)
 				)
 			)
-		)
+		);
+		console.log(`${text} : ${textIsAlcoholic ? "alcoholic" : "not alcoholic"}`)
+		return textIsAlcoholic;
 	}
 
 	protected inferImage(inferences: BusinessInferences, image: ExtractedImage): BusinessInferences {
@@ -60,7 +65,7 @@ export class Word2VecInterpretationProvider implements InterpretationProvider {
 			const { objectName: keyword } = obj;
 			keywords.get(keyword)?.push(obj) || keywords.set(keyword, [obj]);
 		}
-		console.debug(keywords);
+		console.debug(Array.from(keywords.values()));
 
 		// Infer alcoholism
 		const { servesAlcohol } = inferences;

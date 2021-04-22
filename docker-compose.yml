@@ -39,6 +39,8 @@ services:
       - ./src/graphql/schema:/usr/app/lib/graphql/schema
     ports:
       - '${LOCAL_ENDPOINT_PORT:-4000}:${ENDPOINT_PORT:-4000}'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
     command: npm run start:dev
     depends_on:
       - keystone
