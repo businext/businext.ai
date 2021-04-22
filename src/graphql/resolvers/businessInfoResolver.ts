@@ -34,7 +34,11 @@ async function fetchFromDB(
 			return undefined;
 		});
 }
-function addToDB(endpoint: string, businessInfo: BusinessInfoInput, businessInsights: BusinessInferences) {
+async function addToDB(
+	endpoint: string,
+	businessInfo: BusinessInfoInput,
+	businessInsights: BusinessInferences
+) {
 	const query = gql`
 		mutation create($name: String!, $address: String!, $businessInferences: String!) {
 			createBusiness(data: { name: $name, address: $address, businessInferences: $businessInferences }) {
@@ -51,7 +55,7 @@ function addToDB(endpoint: string, businessInfo: BusinessInfoInput, businessInsi
 	};
 
 	const client = new GraphQLClient(endpoint);
-	client.request(query, variables).catch((err) => console.error(err));
+	await client.request(query, variables).catch((err) => console.error(err));
 }
 
 export async function getBusinessInfo(
@@ -82,8 +86,8 @@ export async function getBusinessInfo(
 					const provider = await getInterpretationProvider(interpretationConfig);
 					return provider.interpret({ images: extractions });
 				})
-				.then((inferences) => {
-					addToDB(dbEndpoint, businessInfo, inferences);
+				.then(async (inferences) => {
+					await addToDB(dbEndpoint, businessInfo, inferences);
 					return inferences;
 				});
 	return interpretationResults;
