@@ -78,11 +78,10 @@ export async function getBusinessInfo(
 		: await new BusinessImageProviderAggregator(dataProviderConfig)
 				.getImages(businessInfo)
 				.then((images) => getExtractionProvider(extractionConfig).extract(images))
-				.then((extractions) =>
-					getInterpretationProvider(interpretationConfig).then((provider) =>
-						provider.interpret({ images: extractions })
-					)
-				)
+				.then(async (extractions) => {
+					const provider = await getInterpretationProvider(interpretationConfig);
+					return provider.interpret({ images: extractions });
+				})
 				.then((inferences) => {
 					addToDB(dbEndpoint, businessInfo, inferences);
 					return inferences;
