@@ -1,14 +1,16 @@
 # businext.ai
 
-**Bus**iness **in**sight **ext**ractor **a**nd **i**nterpreter?
+**Bus**iness **in**sight **ext**ractor **a**nd **i**nterpreter
 
 # Configurations
 
-These configurations are to set the api keys for the various services that are used to fetch images and data from. These are to be set in a `.env` file in the root directory of the project.
+To set up this project, a Data provider, an Extraction provider and an Interpretation provider must be configured.
+These configurations set the api keys for the various services that are used throughout the project. These are to be set in a `.env` file in the root directory of the project.
 
-| Environment Variable Name | Value Format |                                 Example                                  | Explanation                                                                                       |
-| ------------------------- | :----------: | :----------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------- |
+| Environment Variable Name | Value Format |                                 Example                                  | Explanation                                                                                  |
+| ------------------------- | :----------: | :----------------------------------------------------------------------: | -------------------------------------------------------------------------------------------- |
 | `BUSINESS_API_CONFIG`     |     JSON     | Click [here](README.md#business_api_config-example) to go to the example | Serialized Configuration object containing your confidential information to access the APIs. |
+| `GOOGLE_APPLICATION_CREDENTIALS` | PATH | GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/service-account-file.json" | Provides authentication credentials to your application code. For an explanation on how to obtain this file, refer to the Google Vision documentation linked [here](https://cloud.google.com/vision/docs/setup) | 
 
 ## `BUSINESS_API_CONFIG` Example
 
