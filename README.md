@@ -1,6 +1,8 @@
 # businext.ai
 
-**Bus**iness **in**sight **ext**ractor **a**nd **i**nterpreter?
+Businext – the **bus**iness **in**sight **ext**ractor **a**nd **i**nterpreter – is an open-source tool that makes it easy to get answers about a business. Watch our introductory video by clicking below:
+
+[![Businext - How it Works](how-businext-works.png)](https://youtu.be/lj-PPQe61I8)
 
 # Configurations
 
