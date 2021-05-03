@@ -4,7 +4,12 @@
 
 # Configurations
 
-To set up this project, a Data provider, an Extraction provider and an Interpretation provider must be configured.
+To set up this project, the following must be configured:
+
+- data provider
+- extraction provider
+- interpretation provider
+
 These configurations set the api keys for the various services that are used throughout the project. These are to be set in a `.env` file in the root directory of the project.
 
 | Environment Variable Name        | Value Format |                                     Example                                     | Explanation                                                                                                                                                                                                     |
